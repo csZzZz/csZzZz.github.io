@@ -158,13 +158,13 @@
   </header>
 
   <section class="post">
-    <p>#多线程基础</p>
-<hr>
-<p>##多线程的基本概念</p>
-<ul>
+    <h1 id="多线程基础"><a href="#多线程基础" class="headerlink" title="多线程基础"></a>多线程基础</h1><hr>
+<h2 id="多线程的基本概念"><a href="#多线程的基本概念" class="headerlink" title="多线程的基本概念"></a>多线程的基本概念</h2><ul>
 <li>同步&amp;异步</li>
 <li>进程&amp;线程</li>
-<li>多线程的概念<br>##同步&amp;异步</li>
+<li>多线程的概念</li>
+</ul>
+<h2 id="同步-amp-异步"><a href="#同步-amp-异步" class="headerlink" title="同步&amp;异步"></a>同步&amp;异步</h2><ul>
 <li><strong>同步</strong>和<strong>异步</strong>是任务执行的两种不同的方式 </li>
 <li><strong>同步</strong><ul>
 <li><strong>多个任务按序依次执行</strong>，就是<strong>同步执行</strong></li>
@@ -177,8 +177,7 @@
 </li>
 </ul>
 <hr>
-<p>##进程&amp;线程</p>
-<ul>
+<h2 id="进程-amp-线程"><a href="#进程-amp-线程" class="headerlink" title="进程&amp;线程"></a>进程&amp;线程</h2><ul>
 <li><strong>进程</strong><ul>
 <li>在系统中正在运行的一个应用程序叫做进程</li>
 <li>每一个进程都是<strong>独立</strong>的，均运行在其专用且受保护的内存空间内</li>
@@ -197,16 +196,14 @@
 </li>
 </ul>
 <hr>
-<p>##多线程执行原理</p>
-<ul>
+<h2 id="多线程执行原理"><a href="#多线程执行原理" class="headerlink" title="多线程执行原理"></a>多线程执行原理</h2><ul>
 <li>单核CPU同一时间，CPU只能处理一个线程，只有一个线程在执行任务</li>
 <li>多线程的同事执行，实际上是CPU在多条线程之间快速的切换（调度任务）</li>
 <li>如果CPU的调度速度足够快，就造成了多线程同时执行的假象</li>
 <li>如果线程非常多，CPU会在多条线程之间不断的调度任务，结果就是消耗了大量的CPU资源，就会造成<strong>每个线程调度的频率会降低</strong>，<strong>线程的执行效率会下降</strong></li>
 </ul>
 <hr>
-<p>##多线程的优缺点</p>
-<ul>
+<h2 id="多线程的优缺点"><a href="#多线程的优缺点" class="headerlink" title="多线程的优缺点"></a>多线程的优缺点</h2><ul>
 <li><p>优点</p>
 <ul>
 <li>能适当的提高程序的执行效率</li>
@@ -221,8 +218,7 @@
 </li>
 </ul>
 <hr>
-<p>##主线程</p>
-<ul>
+<h2 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h2><ul>
 <li>一个程序运行后，默认开启一个线程，称为<strong>主线程</strong>或者<strong>UI线程</strong><ul>
 <li>主线程一般用来刷新UI界面，处理UI事件（点击，滚动，拖拽等事件）</li>
 <li>不要将耗时的操作放到主线程中，会严重影响UI的流畅度，影响UI交互质量</li>
@@ -230,8 +226,7 @@
 </li>
 </ul>
 <hr>
-<p>##多线程的实现方案</p>
-<ul>
+<h2 id="多线程的实现方案"><a href="#多线程的实现方案" class="headerlink" title="多线程的实现方案"></a>多线程的实现方案</h2><ul>
 <li>pthread<ul>
 <li>一套C语言环境下的多线程API，跨平台，可移植，适用于Unix\Linux\Windows等系统，程序员必须自己来管理生命周期，使用难度大</li>
 </ul>
