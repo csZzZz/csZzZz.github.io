@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>Linux命令之文件、磁盘管理 | 日常幻想指南</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Linux命令之文件、磁盘管理 | 日常幻想指南">
+    <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Linux命令之文件、磁盘管理 | 日常幻想指南">
+    <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
+
+    
+    <meta name="author" content="陈不帅">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2017/12/22/Linux命令之文件、磁盘管理/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 日常幻想指南 的主页"><img src="/images/logo.jpg" width="80" alt="日常幻想指南 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for 日常幻想指南">日常幻想指南</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">谦虚 谨慎 严肃 活泼</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/image.html">幻想间</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/monniya" title="GitHub" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="Twitter" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-disabled"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2017-12-21T17:59:20.000Z" class="post-list__meta--date date">2017-12-22</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Linux/">Linux</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">Linux命令之文件、磁盘管理</h1>
+  </header>
+
+  <section class="post">
+    <h3 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h3><h4 id="1-查看文件信息：ls"><a href="#1-查看文件信息：ls" class="headerlink" title="1.查看文件信息：ls"></a>1.查看文件信息：<code>ls</code></h4><p><code>ls</code>是英文<code>list</code>的简写，其功能为列出目录的内容，是用户最常用的命令之一，它类似于DOS下的<code>dir</code>命令。</p>
+<blockquote>
+<p>Linux文件或者目录名称最长可以有256个字符，<code>.</code>代表当前目录，<code>..</code>代表上一级目录，以<code>.</code>开头的文件为隐藏文件，需要用<code>-a</code>参数才能显示</p>
+</blockquote>
+<p><strong>ls常用参数：</strong> </p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td style="text-align:left">显示指定目录下所有的子目录和子文件，包括隐藏文件</td>
+</tr>
+<tr>
+<td>-l</td>
+<td style="text-align:left">以列表方式显示文件的详细信息</td>
+</tr>
+<tr>
+<td>-h</td>
+<td style="text-align:left">配合<code>-l</code>以人性化的方式显示文件大小</td>
+</tr>
+</tbody>
+</table>
+<p><strong>通配符</strong><br>与DOS下的文件操作类似，在Unix/Linux系统中，也同样允许使用特殊字符来同时引用过多个文件名，这些特殊字符被称为通配符</p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td style="text-align:left">可以代表文件名中所有字符</td>
+</tr>
+<tr>
+<td>ls te<code>*</code></td>
+<td style="text-align:left">查找以te开头的文件</td>
+</tr>
+<tr>
+<td>ls <code>*</code>html</td>
+<td style="text-align:left">查看结尾为html的文件</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td style="text-align:left">代表文件名中任意一个字符</td>
+</tr>
+<tr>
+<td>ls <code>?</code>.c</td>
+<td style="text-align:left">只找第一个字符任意，后缀为.c的文件</td>
+</tr>
+<tr>
+<td>ls a.<code>?</code></td>
+<td style="text-align:left">只找前2个字符为a.,最后一个字符任意的文件</td>
+</tr>
+<tr>
+<td><code>[]</code></td>
+<td style="text-align:left">[ ]将字符组括起来，表示可以匹配字符组中的任意一个。<code>-</code>表示字符范围</td>
+</tr>
+<tr>
+<td>[abc]</td>
+<td style="text-align:left">匹配 a b c 中的任意一个</td>
+</tr>
+<tr>
+<td>[a-f]</td>
+<td style="text-align:left">匹配 a-f范围内的任意一个字符</td>
+</tr>
+<tr>
+<td>ls [a-f]*</td>
+<td style="text-align:left">找到 a-f 范围内的任意一个字符开头的文件</td>
+</tr>
+<tr>
+<td>ls a-f</td>
+<td style="text-align:left">查找文件名为‘a-f’的文件，当’-‘处于方括号之外失去通配符的作用</td>
+</tr>
+<tr>
+<td><code>\</code></td>
+<td style="text-align:left">如果要使通配符作为普通字符使用，可以在其前面加上转义字符。<code>?</code>和<code>*</code>在方括号之内时不用使用转义字符就失去通配符的作用</td>
+</tr>
+<tr>
+<td>ls <code>\*a</code></td>
+<td style="text-align:left">查找文件名为<code>*a</code>的文件</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-输出重定向命令：-gt-gt-gt"><a href="#2-输出重定向命令：-gt-gt-gt" class="headerlink" title="2.输出重定向命令：&gt; &gt;&gt;"></a>2.输出重定向命令：<code>&gt;</code> <code>&gt;&gt;</code></h4><p>Linux允许将命令执行结果重定向到一个文件，本应显示在终端上的内容保存到指定文件中<br>如：ls &gt; text.text (text.txt如果不存在，则创建，存在则覆盖其内容)</p>
+<blockquote>
+<p><code>&gt;</code>输出重定向会覆盖原来的内容，<code>&gt;&gt;</code>输出重定向则会追加到文件的尾部</p>
+</blockquote>
+<h4 id="3-分屏显示：more"><a href="#3-分屏显示：more" class="headerlink" title="3.分屏显示：more"></a>3.分屏显示：<code>more</code></h4><p>查看文件内容时，在信息过长无法在一屏上显示时，会出现快速滚屏，使得用户无法看清文件的内容，此时可以使用<code>more</code>命令，每次只显示一页，按下空格键可以显示下一页，按下q键退出显示，按下h键可以获取帮助。</p>
+<h4 id="4-管道："><a href="#4-管道：" class="headerlink" title="4.管道：|"></a>4.管道：<code>|</code></h4><p>管道：<strong>一个命令的输出可以通过管道作为另一个命令的输入</strong></p>
+<pre><code>ls -lh | more
+</code></pre><p>管道前面是显示目标目录里的子目录和文件，包括隐藏文件和目录，管道后面就是把这些信息分屏显示。</p>
+<h4 id="5-清屏：clear"><a href="#5-清屏：clear" class="headerlink" title="5.清屏：clear"></a>5.清屏：<code>clear</code></h4><p><code>clear</code>作用为清除终端上的显示（类似于DOS的cls清屏功能），也可以用快捷键：<code>Ctrl + L</code></p>
+<h4 id="6-切换工作目录：cd"><a href="#6-切换工作目录：cd" class="headerlink" title="6.切换工作目录：cd"></a>6.切换工作目录：<code>cd</code></h4><p>在使用Unix/Linux的时候，经常需要更换工作目录。<code>cd</code>命令可以帮助用户切换工作目录。<strong>Linux所有的目录和文件名大小写敏感</strong></p>
+<p><code>cd</code>后面可以跟绝对路径，也可以跟相对路径。如果省略目录，则默认切换到当前用户的主目录</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cd</td>
+<td style="text-align:left">切换到当前用户的主目录（/home/用户目录）,用户登录的时候，默认的目录就是用户的主目录</td>
+</tr>
+<tr>
+<td>cd~</td>
+<td style="text-align:left">切换到当前用户的主目录（/home/用户目录）</td>
+</tr>
+<tr>
+<td>cd.</td>
+<td style="text-align:left">切换到当前目录</td>
+</tr>
+<tr>
+<td>cd..</td>
+<td style="text-align:left">切换到上一级目录</td>
+</tr>
+<tr>
+<td>cd-</td>
+<td style="text-align:left">可进入上次所在的目录</td>
+</tr>
+</tbody>
+</table>
+<p><strong>如果路径是从根路径开始的，则路径的前面需要加上<code>/</code>。通常进入某个目录里的文件夹，前面不用加<code>/</code></strong>.</p>
+<h4 id="7-显示当前路径：pwd"><a href="#7-显示当前路径：pwd" class="headerlink" title="7.显示当前路径：pwd"></a>7.显示当前路径：<code>pwd</code></h4><p>使用<code>pwd</code>命令可以显示当前的工作目录，该命令很简单，直接输入<code>pwd</code>即可，后面不带参数。</p>
+<h4 id="8-创建目录-mkdir"><a href="#8-创建目录-mkdir" class="headerlink" title="8.创建目录:mkdir"></a>8.创建目录:<code>mkdir</code></h4><p>通过<code>mkdir</code>命令可以创建一个新的目录，参数<code>-p</code>可以递归创建目录。</p>
+<p><strong>新建目录的名称不能与当前目录中已有的目录或者文件同名，并且目录创建者必须对当前目录具有写权限</strong></p>
+<blockquote>
+<p><code>tree</code>命令可以以目录树的方式显示目录结构</p>
+</blockquote>
+<h4 id="9-删除目录：rmdir"><a href="#9-删除目录：rmdir" class="headerlink" title="9.删除目录：rmdir"></a>9.删除目录：<code>rmdir</code></h4><p>可以使用<code>rmdir</code>命令删除一个目录。必须离开要删除的目录，并且目录必须为空目录，不然提示删除失败。</p>
+<h4 id="10-删除文件：rm"><a href="#10-删除文件：rm" class="headerlink" title="10.删除文件：rm"></a>10.删除文件：<code>rm</code></h4><p>可以通过<code>rm</code>命令来删除文件或者目录。因为文件删除后不能恢复，为了防止文件误删，可以用<code>rm -i</code>来确认是否要删除文件</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-i</td>
+<td style="text-align:left">询问是否确认删除文件</td>
+</tr>
+<tr>
+<td>-f</td>
+<td style="text-align:left">强制删除，忽略不存在的文件，无需提示</td>
+</tr>
+<tr>
+<td>-r</td>
+<td style="text-align:left">递归的删除目录下的内容，删除文件夹时必须加此参数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="11-建立链接文件：ln"><a href="#11-建立链接文件：ln" class="headerlink" title="11.建立链接文件：ln"></a>11.建立链接文件：<code>ln</code></h4><p>Linux中的链接文件类似于Windows下的快捷方式。</p>
+<p>链接文件分为<strong>软链接</strong>和<strong>硬链接</strong></p>
+<p><strong>软链接</strong>：不占用磁盘空间，源文件删除则软链接失效<br><strong>硬链接</strong>：硬链接只能链接普通文件，不能链接目录</p>
+<pre><code>ln 源文件 链接文件  硬链接
+ln -s 源文件 链接文件  软链接
+</code></pre><p>没有<code>-s</code>代表建立一个硬链接文件。两个文件占用同样大小的硬盘空间，即使删除了源文件，链接文件还是存在。所以<code>-s</code>是常用的方式。</p>
+<p><strong>如果源文件和链接文件不在同一个目录当中，源文件要使用绝对路径，不能使用相对路径</strong></p>
+<h4 id="12-查看或者合并文件内容：cat"><a href="#12-查看或者合并文件内容：cat" class="headerlink" title="12.查看或者合并文件内容：cat"></a>12.查看或者合并文件内容：<code>cat</code></h4><p><code>cat</code>命令的用途是连接文件或标准输入并打印。这个命令常用来显示文件内容，或者将几个文件连接起来显示，或者从标准输入读取内容并显示，它常与重定向<code>&gt;</code>符号配合使用。</p>
+<pre><code>cat text.txt text1.txt &gt; hah.txt
+把两个txt文件中的内容重定向到hah.txt中，并查看文件内容
+</code></pre><h4 id="13-文本搜索：grep"><a href="#13-文本搜索：grep" class="headerlink" title="13.文本搜索：grep"></a>13.文本搜索：<code>grep</code></h4><p>Linux系统中<code>grep</code>命令是一种强大的文本搜索工具，<code>grep</code>允许对文本文件进行模式查找。如果找到匹配模式，<code>grep</code>打印包含模式的所有行。</p>
+<p><code>grep</code>一般格式为：</p>
+<pre><code>grep [-选项] “搜索内容串” 文件名
+</code></pre><p>在<code>grep</code>命令中输入字符串参数时，最好引号或者双引号括起来。例如：<br><strong>grep ‘a’ 1.txt</strong></p>
+<p>常用选项说明：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-v</td>
+<td style="text-align:left">显示不包含匹配文本的所有行（相当于取反）</td>
+</tr>
+<tr>
+<td>-n</td>
+<td style="text-align:left">显示匹配行及行号</td>
+</tr>
+<tr>
+<td>-i</td>
+<td style="text-align:left">忽略大小写</td>
+</tr>
+</tbody>
+</table>
+<p><code>grep</code>的搜索内容可以使正则表达式。</p>
+<p><code>grep</code>常用的正则表达式:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^a</td>
+<td style="text-align:left">行首，搜寻以a开头的行 grep -n ‘^a’ 1.txt</td>
+</tr>
+<tr>
+<td>ke$</td>
+<td style="text-align:left">行尾，搜寻以ke结尾的行 grep -n ‘ke$’ 1.txt</td>
+</tr>
+<tr>
+<td>[sS]dsd[lL]</td>
+<td style="text-align:left">匹配[]里一系列字符中的一个</td>
+</tr>
+<tr>
+<td>.</td>
+<td style="text-align:left">(点)匹配一个非换行符的字符</td>
+</tr>
+</tbody>
+</table>
+<p>上面最后两行举例：</p>
+<p>搜寻单词signal，signaL,Signal,SignaL的行.</p>
+<pre><code>grep -n &apos;[Ss]igna[Ll]&apos; 1.txt
+</code></pre><p>匹配e和e之间有任意一个字符，可以匹配eee,eae,eve,但是不能匹配ee，eaae.</p>
+<pre><code>grep -n &apos;e.e&apos; 1.txt
+</code></pre>
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/12/21/Linux基础命令/" title="Linux命令概述">Linux命令概述</a></h2>
+                <p class="excerpt">
+                
+                Linux命令Linux提供了大量的命令，利用它可以有效的完成大量的工作，如磁盘操作，文件存取，目录操作，进程管理，文件权限设定等。Linux发行版本最少的命令也有200多个，我们只介绍比较重要和使用频率最多的命令。
+1.命令使用方法Linux命令格式command [-options] [para
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2017-12-21T14:07:25.000Z" class="post-list__meta--date date">2017-12-21</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Linux/">Linux</a>
+</span><a class="btn-border-small" href="/2017/12/21/Linux基础命令/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2017 陈不帅 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>

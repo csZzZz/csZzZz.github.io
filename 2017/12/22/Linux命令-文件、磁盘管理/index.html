@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-    <title>Linux命令概述 | 日常幻想指南</title>
+    <title>Linux命令--文件、磁盘管理 | 日常幻想指南</title>
     <meta name="renderer" content="webkit">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -15,11 +15,11 @@
     <meta name="description" content="谦虚 谨慎 严肃 活泼">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Linux命令概述 | 日常幻想指南">
+    <meta name="twitter:title" content="Linux命令--文件、磁盘管理 | 日常幻想指南">
     <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Linux命令概述 | 日常幻想指南">
+    <meta property="og:title" content="Linux命令--文件、磁盘管理 | 日常幻想指南">
     <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
 
     
@@ -37,7 +37,7 @@
     <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
     
 
-    <link rel="canonical" href="http://yoursite.com/2017/12/21/Linux基础命令/"/>
+    <link rel="canonical" href="http://yoursite.com/2017/12/22/Linux命令-文件、磁盘管理/"/>
 
                  
 </head>
@@ -67,7 +67,7 @@
           <div>
           <nav class="cover-navigation cover-navigation--primary">
             <ul class="navigation">
-              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+              <li class="navigation__item"><a href="/#blog" title="Blogを読む" class="blog-button">Blog</a></li>
             
               <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
             
@@ -146,69 +146,17 @@
 
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2017-12-21T14:07:25.000Z" class="post-list__meta--date date">2017-12-21</time> &#8226; <span class="post-meta__tags tags">于 
-  <a class="tag-link" href="/tags/Linux/">Linux</a>
- </span>
+      <time datetime="2017-12-21T17:56:20.000Z" class="post-list__meta--date date">2017-12-22</time> &#8226; <span class="post-meta__tags tags">于  </span>
       <span class="page-pv">
-       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+       No. <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
       </span> 
    
     </div>
-    <h1 class="post-title">Linux命令概述</h1>
+    <h1 class="post-title">Linux命令--文件、磁盘管理</h1>
   </header>
 
   <section class="post">
-    <h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><p>Linux提供了大量的命令，利用它可以有效的完成大量的工作，如磁盘操作，文件存取，目录操作，进程管理，文件权限设定等。Linux发行版本最少的命令也有200多个，我们只介绍比较重要和使用频率最多的命令。</p>
-<h3 id="1-命令使用方法"><a href="#1-命令使用方法" class="headerlink" title="1.命令使用方法"></a>1.命令使用方法</h3><h4 id="Linux命令格式"><a href="#Linux命令格式" class="headerlink" title="Linux命令格式"></a>Linux命令格式</h4><pre><code>command [-options] [parameter1]...
-</code></pre><p>eg: <code>ls -a ./</code>  代表查看根目录下的所有子目录与文件，包括隐藏文件</p>
-<blockquote>
-<p>command ： 命令名，相应功能的英文单词或者单词的缩写</p>
-<p>[-options] ：选项，可以用来对命令进行控制，也可以省略，[]代表可选</p>
-<p>parameter ：传给命令的参数，可以是0个1个或者多个</p>
-</blockquote>
-<h3 id="2-查看帮助文档"><a href="#2-查看帮助文档" class="headerlink" title="2.查看帮助文档"></a>2.查看帮助文档</h3><h4 id="1-–help"><a href="#1-–help" class="headerlink" title="1. –help"></a>1. <strong>–help</strong></h4><p>一般是Linux命令自带的帮助信息,<strong>command –help</strong> 如：<code>ls --help</code> </p>
-<h4 id="2-man-manual"><a href="#2-man-manual" class="headerlink" title="2. man(manual)"></a>2. <strong>man(manual)</strong></h4><p><strong>man</strong>是Linux提供的一个手册，包含了绝大部分的命令和函数说明 <strong>man command</strong><br><strong>使用<code>man</code>时的操作符</strong></p>
-<table>
-<thead>
-<tr>
-<th>功能键</th>
-<th style="text-align:left">功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>空格键</td>
-<td style="text-align:left">显示手册的下一屏</td>
-</tr>
-<tr>
-<td>Enter键</td>
-<td style="text-align:left">一次滚动手册页的一行</td>
-</tr>
-<tr>
-<td>b （back）</td>
-<td style="text-align:left">回滚一屏</td>
-</tr>
-<tr>
-<td>f (forward)</td>
-<td style="text-align:left">前滚一屏</td>
-</tr>
-<tr>
-<td>q</td>
-<td style="text-align:left">退出man命令</td>
-</tr>
-<tr>
-<td>h</td>
-<td style="text-align:left">列出所有功能键</td>
-</tr>
-<tr>
-<td>/word</td>
-<td style="text-align:left">搜索word字符串</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-自动补全"><a href="#3-自动补全" class="headerlink" title="3.自动补全"></a>3.自动补全</h3><p>在敲出命令的前几个字母的同时，按下Tab键，系统会自动帮我们补全命令</p>
-<h3 id="4-历史命令"><a href="#4-历史命令" class="headerlink" title="4.历史命令"></a>4.历史命令</h3><p>在系统执行过一些命令后，可以按上下键来翻看以前的命令，history将执行过的命令列举出来</p>
-
+    
   </section>
 
 </article>
@@ -216,40 +164,21 @@
 <section class="read-more">
            
     
+        
+        
                
             <div class="read-more-item">
-                <span class="read-more-item-dim">Newer Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2017/12/22/Linux命令之文件、磁盘管理/" title="Linux命令之文件、磁盘管理">Linux命令之文件、磁盘管理</a></h2>
+                <span class="read-more-item-dim">以前の記事</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/12/21/Linux基础命令/" title="Linux命令概述">Linux命令概述</a></h2>
                 <p class="excerpt">
                 
-                文件管理1.查看文件信息：lsls是英文list的简写，其功能为列出目录的内容，是用户最常用的命令之一，它类似于DOS下的dir命令。
-
-Linux文件或者目录名称最长可以有256个字符，.代表当前目录，..代表上一级目录，以.开头的文件为隐藏文件，需要用-a参数才能显示
-
-ls常用参数： 
-
-
-
-
+                Linux命令Linux提供了大量的命令，利用它可以有效的完成大量的工作，如磁盘操作，文件存取，目录操作，进程管理，文件权限设定等。Linux发行版本最少的命令也有200多个，我们只介绍比较重要和使用频率最多的命令。
+1.命令使用方法Linux命令格式command [-options] [para
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2017-12-21T17:59:20.000Z" class="post-list__meta--date date">2017-12-22</time> &#8226; <span class="post-list__meta--tags tags">于 
+                <div class="post-list__meta"><time datetime="2017-12-21T14:07:25.000Z" class="post-list__meta--date date">2017-12-21</time> &#8226; <span class="post-list__meta--tags tags">于 
   <a class="tag-link" href="/tags/Linux/">Linux</a>
-</span><a class="btn-border-small" href="/2017/12/22/Linux命令之文件、磁盘管理/">继续阅读</a></div>
-                           
-            </div>
-        
-        
-               
-            <div class="read-more-item">
-                <span class="read-more-item-dim">Older Post</span>
-                <h2 class="post-list__post-title post-title"><a href="/2017/10/18/hello-world/" title="Hello World">Hello World</a></h2>
-                <p class="excerpt">
-                
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-                &hellip;
-                </p>
-                <div class="post-list__meta"><time datetime="2017-10-18T12:43:03.000Z" class="post-list__meta--date date">2017-10-18</time> &#8226; <span class="post-list__meta--tags tags">于 </span><a class="btn-border-small" href="/2017/10/18/hello-world/">继续阅读</a></div>
+</span><a class="btn-border-small" href="/2017/12/21/Linux基础命令/">继续阅读</a></div>
                        
             </div>
         
