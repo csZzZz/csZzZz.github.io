@@ -390,6 +390,192 @@ ln -s 源文件 链接文件  软链接
 <pre><code>grep -n &apos;[Ss]igna[Ll]&apos; 1.txt
 </code></pre><p>匹配e和e之间有任意一个字符，可以匹配eee,eae,eve,但是不能匹配ee，eaae.</p>
 <pre><code>grep -n &apos;e.e&apos; 1.txt
+</code></pre><h4 id="14-查找文件：find"><a href="#14-查找文件：find" class="headerlink" title="14.查找文件：find"></a>14.查找文件：<code>find</code></h4><p><code>find</code>命令功能非常强大，通常用来在特定的目录下搜索符合条件的文件，也可以用来搜索特定用户属主的文件。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>find</code> ./ -name test.sh</td>
+<td style="text-align:left">查找当前目录下所有名为test.sh的文件</td>
+</tr>
+<tr>
+<td><code>find</code> ./ -name ‘*.sh’</td>
+<td style="text-align:left">查找当前目录下所有后缀为.sh的文件</td>
+</tr>
+<tr>
+<td><code>find</code> ./ -name “[A-Z]*”</td>
+<td style="text-align:left">查找当前目录下所有以大写字母开头的文件</td>
+</tr>
+<tr>
+<td><code>find</code> /tmp -size 2M</td>
+<td style="text-align:left">查找在/tmp文件下大小为2M的文件</td>
+</tr>
+<tr>
+<td><code>find</code> /tmp -size +2M</td>
+<td style="text-align:left">查找在/tmp文件下大于2M的文件</td>
+</tr>
+<tr>
+<td><code>find</code> /tmp -size -2M</td>
+<td style="text-align:left">查找在/tmp文件下小于2M的文件</td>
+</tr>
+<tr>
+<td><code>find</code> /tmp -size +4M -size -5M</td>
+<td style="text-align:left">查找在/tmp文件下大于4M小于5M的文件</td>
+</tr>
+<tr>
+<td><code>find</code> ./ -perm 0777</td>
+<td style="text-align:left">查找当前目录下权限为777的文件或者目录</td>
+</tr>
+</tbody>
+</table>
+<h4 id="15-拷贝文件-cp"><a href="#15-拷贝文件-cp" class="headerlink" title="15.拷贝文件:cp"></a>15.拷贝文件:<code>cp</code></h4><p><code>cp</code>命令功能是将给出的文件或者目录复制到另一个文件或目录中，相当于DOS下的<code>copy</code>命令</p>
+<p>常用选项说明：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td style="text-align:left">该选项通常在复制目录时使用，它保留链接、文件属性，并递归地复制目录，简单而言，保持文件原有属性</td>
+</tr>
+<tr>
+<td>-f</td>
+<td style="text-align:left">已经存在的目标文件而不提示</td>
+</tr>
+<tr>
+<td>-i</td>
+<td style="text-align:left">交互式复制，而覆盖目标文件之前将给出提示要求用户确认</td>
+</tr>
+<tr>
+<td>-r</td>
+<td style="text-align:left">若给出的源文件是目录文件，则<code>cp</code>将递归复制该目录下的所有子目录和文件，目标文件必须为一个目录名</td>
+</tr>
+<tr>
+<td>-v</td>
+<td style="text-align:left">显示拷贝进度</td>
+</tr>
+</tbody>
+</table>
+<h4 id="16-移动文件：mv"><a href="#16-移动文件：mv" class="headerlink" title="16.移动文件：mv"></a>16.移动文件：<code>mv</code></h4><p>用户可以用<code>mv</code>命令来移动文件或者目录，也可以给文件或目录重命名。</p>
+<p>常用选项说明：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-f</td>
+<td style="text-align:left">禁止交互式操作，如有覆盖也不会给出提示</td>
+</tr>
+<tr>
+<td>-i</td>
+<td style="text-align:left">确认交互方式操作，如果<code>mv</code>操作井导致对已存在的目标文件的覆盖，系统会询问是否重写，要求用户回答以免误覆盖文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td style="text-align:left">显示移动进度</td>
+</tr>
+</tbody>
+</table>
+<h4 id="17-归档管理：tar"><a href="#17-归档管理：tar" class="headerlink" title="17.归档管理：tar"></a>17.归档管理：<code>tar</code></h4><p>计算机中的数据经常需要备份，<code>tar</code>是Unix/Linux最常用的备份工具，此命令可以把一系列文件归档到一个大文件中，也可以把档案文件解开以恢复数据。</p>
+<blockquote>
+<p><code>tar</code>使用格式：<code>tar</code> [参数] 打包文件名 文件</p>
+</blockquote>
+<pre><code>打包文件 tar -cvf 打包文件.tar 被打包的文件和路径
+解包文件 tar -xvf 打包文件tar
+</code></pre><p><code>tar</code>命令很特殊，其参数前面可以使用<code>-</code>,也可以不使用。</p>
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td style="text-align:left">生成档案文件，创建打包文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td style="text-align:left">列出归档解档的详细过程，显示进度</td>
+</tr>
+<tr>
+<td>-f</td>
+<td style="text-align:left">指定档案文件名称，f后面一定是tar文件，所以必须放选项最后</td>
+</tr>
+<tr>
+<td>-t</td>
+<td style="text-align:left">列出档案中包含的文件</td>
+</tr>
+<tr>
+<td>-x</td>
+<td style="text-align:left">解开档案文件</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>除了f需要放在参数的最后，其他参数的顺序任意</p>
+</blockquote>
+<pre><code>tar -cvf test.tar *  f必须放在参数最后
+</code></pre><h4 id="18-文件压缩解压：gzip-bzip2"><a href="#18-文件压缩解压：gzip-bzip2" class="headerlink" title="18.文件压缩解压：gzip bzip2"></a>18.文件压缩解压：<code>gzip</code> <code>bzip2</code></h4><ul>
+<li><code>gzip</code></li>
+</ul>
+<p><code>tar</code>和<code>gzip</code>命令结合使用实现文件打包、压缩。<code>tar</code>只负责打包文件，但不压缩，用<code>gzip</code>压缩<code>tar</code>打包后的文件，其扩展名一般用 <strong>xxxx.tar.gz</strong></p>
+<p><code>gzip</code>常用格式：</p>
+<blockquote>
+<p>gzip [选项] 被压缩文件</p>
+</blockquote>
+<p>常用选项：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d</td>
+<td style="text-align:left">解压</td>
+</tr>
+<tr>
+<td>-f</td>
+<td style="text-align:left">压缩所有子目录</td>
+</tr>
+</tbody>
+</table>
+<p><code>tar</code>这个命令并没有压缩的功能，它只是一个打包的命令，但是在<code>tar</code>命令中增加一个选项<strong>-z</strong>可以调用<code>gzip</code>实现一个压缩的功能，实现一个先打包后压缩的过程</p>
+<p>压缩用法:</p>
+<pre><code>tar -zcvf 打包文件.tar.gz 文件
+</code></pre><p><strong>-z:指定压缩包的格式为：file.tar.gz</strong></p>
+<p>解压用法：</p>
+<pre><code>tar -zxvf test.tar.gz 解压到当前目录下
+tar -zxvf test.tar.gz -C 指定目录 XXX/解压到指定目录（必须事先存在）
+</code></pre><ul>
+<li><code>bzip2</code></li>
+</ul>
+<p><code>tar</code>与<code>bzip2</code>命令结合使用实现文件打包，压缩(用法和<code>gzip</code>一样)。</p>
+<p>用<code>bzip2</code>压缩<code>tar</code>打包后的文件，其扩展名一般用xxxx.tar.bz2。</p>
+<blockquote>
+<p>在<code>tar</code>命令中增加一个选项(-j)可以调用<code>bzip2</code>实现了一个压缩的功能，实现一个先打包后压缩的过程</p>
+</blockquote>
+<pre><code>压缩用法：tar -jcvf 压缩包包名 文件 tar -jcvf bk.tar.bz2 *.c
+解压用法：tar -jxvf 压缩包文件 tar -jxvf bk.tar.bz2 -C 目标目录（必须事先存在）
+</code></pre><h4 id="19-查看命令位置：which"><a href="#19-查看命令位置：which" class="headerlink" title="19.查看命令位置：which"></a>19.查看命令位置：<code>which</code></h4><pre><code>which ls 如果找到就显示这个命令的路径    
 </code></pre>
   </section>
 
