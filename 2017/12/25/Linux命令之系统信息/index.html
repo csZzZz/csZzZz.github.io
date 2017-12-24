@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-    <title>Linux命令概述 | 日常幻想指南</title>
+    <title>Linux命令之系统信息 | 日常幻想指南</title>
     <meta name="renderer" content="webkit">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -15,11 +15,11 @@
     <meta name="description" content="谦虚 谨慎 严肃 活泼">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Linux命令概述 | 日常幻想指南">
+    <meta name="twitter:title" content="Linux命令之系统信息 | 日常幻想指南">
     <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Linux命令概述 | 日常幻想指南">
+    <meta property="og:title" content="Linux命令之系统信息 | 日常幻想指南">
     <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
 
     
@@ -37,7 +37,7 @@
     <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
     
 
-    <link rel="canonical" href="http://yoursite.com/2017/12/21/Linux基础命令/"/>
+    <link rel="canonical" href="http://yoursite.com/2017/12/25/Linux命令之系统信息/"/>
 
                  
 </head>
@@ -146,7 +146,7 @@
 
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2017-12-21T14:07:25.000Z" class="post-list__meta--date date">2017-12-21</time> &#8226; <span class="post-meta__tags tags">于 
+      <time datetime="2017-12-24T22:59:04.000Z" class="post-list__meta--date date">2017-12-25</time> &#8226; <span class="post-meta__tags tags">于 
   <a class="tag-link" href="/tags/Linux/">Linux</a>
  </span>
       <span class="page-pv">
@@ -154,60 +154,102 @@
       </span> 
    
     </div>
-    <h1 class="post-title">Linux命令概述</h1>
+    <h1 class="post-title">Linux命令之系统信息</h1>
   </header>
 
   <section class="post">
-    <h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><p>Linux提供了大量的命令，利用它可以有效的完成大量的工作，如磁盘操作，文件存取，目录操作，进程管理，文件权限设定等。Linux发行版本最少的命令也有200多个，我们只介绍比较重要和使用频率最多的命令。</p>
-<h3 id="1-命令使用方法"><a href="#1-命令使用方法" class="headerlink" title="1.命令使用方法"></a>1.命令使用方法</h3><h4 id="Linux命令格式"><a href="#Linux命令格式" class="headerlink" title="Linux命令格式"></a>Linux命令格式</h4><pre><code>command [-options] [parameter1]...
-</code></pre><p>eg: <code>ls -a ./</code>  代表查看根目录下的所有子目录与文件，包括隐藏文件</p>
-<blockquote>
-<p>command ： 命令名，相应功能的英文单词或者单词的缩写</p>
-<p>[-options] ：选项，可以用来对命令进行控制，也可以省略，[]代表可选</p>
-<p>parameter ：传给命令的参数，可以是0个1个或者多个</p>
-</blockquote>
-<h3 id="2-查看帮助文档"><a href="#2-查看帮助文档" class="headerlink" title="2.查看帮助文档"></a>2.查看帮助文档</h3><h4 id="1-–help"><a href="#1-–help" class="headerlink" title="1. –help"></a>1. <strong>–help</strong></h4><p>一般是Linux命令自带的帮助信息,<strong>command –help</strong> 如：<code>ls --help</code> </p>
-<h4 id="2-man-manual"><a href="#2-man-manual" class="headerlink" title="2. man(manual)"></a>2. <strong>man(manual)</strong></h4><p><strong>man</strong>是Linux提供的一个手册，包含了绝大部分的命令和函数说明 <strong>man command</strong><br><strong>使用<code>man</code>时的操作符</strong></p>
-<table>
+    <h3 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h3><table>
 <thead>
 <tr>
-<th>功能键</th>
-<th style="text-align:left">功能</th>
+<th>命令</th>
+<th style="text-align:left">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>空格键</td>
-<td style="text-align:left">显示手册的下一屏</td>
+<td>date</td>
+<td style="text-align:left">系统时间</td>
 </tr>
 <tr>
-<td>Enter键</td>
-<td style="text-align:left">一次滚动手册页的一行</td>
-</tr>
-<tr>
-<td>b （back）</td>
-<td style="text-align:left">回滚一屏</td>
-</tr>
-<tr>
-<td>f (forward)</td>
-<td style="text-align:left">前滚一屏</td>
-</tr>
-<tr>
-<td>q</td>
-<td style="text-align:left">退出man命令</td>
-</tr>
-<tr>
-<td>h</td>
-<td style="text-align:left">列出所有功能键</td>
-</tr>
-<tr>
-<td>/word</td>
-<td style="text-align:left">搜索word字符串</td>
+<td>cal</td>
+<td style="text-align:left">calendar 查看日历，-y 选项可以查看一年的日历</td>
 </tr>
 </tbody>
 </table>
-<h3 id="3-自动补全"><a href="#3-自动补全" class="headerlink" title="3.自动补全"></a>3.自动补全</h3><p>在敲出命令的前几个字母的同时，按下Tab键，系统会自动帮我们补全命令</p>
-<h3 id="4-历史命令"><a href="#4-历史命令" class="headerlink" title="4.历史命令"></a>4.历史命令</h3><p>在系统执行过一些命令后，可以按上下键来翻看以前的命令，history将执行过的命令列举出来</p>
+<h3 id="磁盘信息"><a href="#磁盘信息" class="headerlink" title="磁盘信息"></a>磁盘信息</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>df -h</td>
+<td style="text-align:left">disk free 显示磁盘剩余空间</td>
+</tr>
+<tr>
+<td>du -h[目录名]</td>
+<td style="text-align:left">disk usage 显示目录下的文件大小</td>
+</tr>
+<tr>
+<td>选项说明 （-h</td>
+<td style="text-align:left">以人性化的方式显示文件大小</td>
+</tr>
+</tbody>
+</table>
+<h3 id="进程信息"><a href="#进程信息" class="headerlink" title="进程信息"></a>进程信息</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ps aux(选项)</td>
+<td style="text-align:left">process status 查看进程的详细信息</td>
+</tr>
+<tr>
+<td>top</td>
+<td style="text-align:left">动态的显示运行中的进程并且排序</td>
+</tr>
+<tr>
+<td>kill[-9]进程代号</td>
+<td style="text-align:left">终止指定代号的进程，-9表示强行终止</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>退出<code>top</code>可直接输入 <code>q</code></p>
+<p><code>ps</code>默认只会显示当前用户通过终端启动的应用程序</p>
+</blockquote>
+<p><code>ps</code>选项说明</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td style="text-align:left">显示终端上的所有进程，包括其他用户的进程</td>
+</tr>
+<tr>
+<td>u</td>
+<td style="text-align:left">显示进程的详细状态</td>
+</tr>
+<tr>
+<td>x</td>
+<td style="text-align:left">显示没有控制终端的进程</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>使用<code>kill</code>命令时，最好只终止由当前用户开启的进程，而不要终止 root 身份开启的进程，否则可能导致系统崩溃</p>
+</blockquote>
 
   </section>
 
@@ -216,40 +258,24 @@
 <section class="read-more">
            
     
-               
-            <div class="read-more-item">
-                <span class="read-more-item-dim">新しい記事</span>
-                <h2 class="post-list__post-title post-title"><a href="/2017/12/22/Linux命令之文件、磁盘管理/" title="Linux命令之文件、磁盘管理">Linux命令之文件、磁盘管理</a></h2>
-                <p class="excerpt">
-                
-                文件管理1.查看文件信息：lsls是英文list的简写，其功能为列出目录的内容，是用户最常用的命令之一，它类似于DOS下的dir命令。
-
-Linux文件或者目录名称最长可以有256个字符，.代表当前目录，..代表上一级目录，以.开头的文件为隐藏文件，需要用-a参数才能显示
-
-ls常用参数： 
-
-
-
-
-                &hellip;
-                </p>
-                <div class="post-list__meta"><time datetime="2017-12-21T17:59:20.000Z" class="post-list__meta--date date">2017-12-22</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Linux/">Linux</a>
-</span><a class="btn-border-small" href="/2017/12/22/Linux命令之文件、磁盘管理/">继续阅读</a></div>
-                           
-            </div>
         
         
                
             <div class="read-more-item">
                 <span class="read-more-item-dim">以前の記事</span>
-                <h2 class="post-list__post-title post-title"><a href="/2017/10/18/hello-world/" title="Hello World">Hello World</a></h2>
+                <h2 class="post-list__post-title post-title"><a href="/2017/12/25/Linux命令之用户权限管理/" title="Linux命令之用户权限管理">Linux命令之用户权限管理</a></h2>
                 <p class="excerpt">
                 
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+                用户和权限的基本概念基本概念
+用户是Linux系统中重要的一环，用户管理包括用户和组管理
+在Linux系统中，不论是由本机或是远程登录系统，每个系统都必须拥有一个账号，并且对于不同的系统资源拥有不同的使用权限
+在Linux中，可以指定每一个用户针对不同的文件或者目录的不同权限
+对文件/目录的权限包括
                 &hellip;
                 </p>
-                <div class="post-list__meta"><time datetime="2017-10-18T12:43:03.000Z" class="post-list__meta--date date">2017-10-18</time> &#8226; <span class="post-list__meta--tags tags">于 </span><a class="btn-border-small" href="/2017/10/18/hello-world/">继续阅读</a></div>
+                <div class="post-list__meta"><time datetime="2017-12-24T18:12:03.000Z" class="post-list__meta--date date">2017-12-25</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Linux/">Linux</a>
+</span><a class="btn-border-small" href="/2017/12/25/Linux命令之用户权限管理/">继续阅读</a></div>
                        
             </div>
         
