@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-    <title>日常幻想指南</title>
+    <title>八大排序算法Python实现 | 日常幻想指南</title>
     <meta name="renderer" content="webkit">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -15,11 +15,11 @@
     <meta name="description" content="谦虚 谨慎 严肃 活泼">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="日常幻想指南">
+    <meta name="twitter:title" content="八大排序算法Python实现 | 日常幻想指南">
     <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="日常幻想指南">
+    <meta property="og:title" content="八大排序算法Python实现 | 日常幻想指南">
     <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
 
     
@@ -37,7 +37,7 @@
     <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
     
 
-    <link rel="canonical" href="http://yoursite.com"/>
+    <link rel="canonical" href="http://yoursite.com/2018/01/11/八大排序算法Python实现/"/>
 
                  
 </head>
@@ -142,65 +142,79 @@
 
     <div class="content-wrapper">
         <div class="content-wrapper__inner">
-            <div class="main-post-list">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-01-10T16:02:52.000Z" class="post-list__meta--date date">2018-01-11</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/算法与数据结构/">算法与数据结构</a>
+ </span>
+      <span class="page-pv">
+       阅读 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">八大排序算法Python实现</h1>
+  </header>
+
+  <section class="post">
+    <p><strong>在开始之前,先推荐一个网站</strong></p>
+<p><a href="https://visualgo.net/zh" target="_blank" rel="external">数据结构动态可视化</a></p>
+<p>可以让你更直观的来学习算法与数据结构,现在让我们开始最常用也是面试中最常考的排序算法吧!</p>
+<h3 id="1-冒泡排序-BubbleSort"><a href="#1-冒泡排序-BubbleSort" class="headerlink" title="1.冒泡排序(BubbleSort)"></a>1.冒泡排序(BubbleSort)</h3><h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><ul>
+<li>比较两个数的大小,较大的数下沉,较小的数冒起来.</li>
+</ul>
+<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><ul>
+<li>比较相邻的两个数据,如果第二个数小,就交换位置.</li>
+<li>从后向前两两比较,一直到比较最前两个数据.最终最小数被交换到起始的位置,这样第一个最小数的位置就排好了</li>
+<li>继续重复上述过程,一次将第2,3…n-1个最小数排好位置</li>
+</ul>
+<h4 id="平均时间复杂度-O-n-2"><a href="#平均时间复杂度-O-n-2" class="headerlink" title="平均时间复杂度:O(n^2)"></a>平均时间复杂度:O(n^2)</h4><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>def bubble_sort(input_list):
+    length = len(input_list)
+    for i in range(length):
+        for j in range(i + 1, length):
+            if input_list[i] &gt; input_list[j]:
+                # 交换两个数
+                input_list[i], input_list[j] = input_list[j], input_list[i]
+    return input_list
+</code></pre><h3 id="2-快速排序-Quicksort"><a href="#2-快速排序-Quicksort" class="headerlink" title="2.快速排序(Quicksort)"></a>2.快速排序(Quicksort)</h3><h5 id="基本思想-分治"><a href="#基本思想-分治" class="headerlink" title="基本思想:(分治)"></a>基本思想:(分治)</h5><ul>
+<li>先从数列中取出一个数作为key值</li>
+<li>将比这个数小的数全部放在他的左边,大于或等于他的数全部放在他的右边</li>
+<li>对总有两个小数列重复第二部,直至各区间只有1个数</li>
+</ul>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
     
-  <ol class="post-list">
-  
-    
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2017/12/26/Python风格规范/" title="link to post.title">Python风格规范</a></h2>
-      <p class="excerpt">
-    
-      MARK一下，随时翻看，就不搬运了
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/12/26/Python风格规范/" title="Python风格规范">Python风格规范</a></h2>
+                <p class="excerpt">
+                
+                MARK一下，随时翻看，就不搬运了
 Python风格规范Github地址
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2017-12-25T23:58:26.000Z" class="post-list__meta--date date">2017-12-26</time> &#8226; <span class="post-list__meta--tags tags">于 
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2017-12-25T23:58:26.000Z" class="post-list__meta--date date">2017-12-26</time> &#8226; <span class="post-list__meta--tags tags">于 
   <a class="tag-link" href="/tags/Python/">Python</a>
 </span><a class="btn-border-small" href="/2017/12/26/Python风格规范/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
+                       
+            </div>
+        
+     
+   
+   
   
-    
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2017/12/26/Python语言规范/" title="link to post.title">Python语言规范</a></h2>
-      <p class="excerpt">
-    
-      搬运自Python语言规范1.对你的代码运行pylint定义:    pylint是一个在Python源代码中查找bug的工具. 对于C和C++这样的不那么动态的(译者注: 原文是less dynamic)语言, 这些bug通常由编译器来捕获. 由于Python的动态特性, 有些警告可能不对. 不过伪告警应该很少.
-优点:    可以捕获容易忽视的错误, 例如输入错误, 使用未赋值的变量等.
-缺点
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2017-12-25T23:14:04.000Z" class="post-list__meta--date date">2017-12-26</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Python/">Python</a>
-</span><a class="btn-border-small" href="/2017/12/26/Python语言规范/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
+</section>
+
   
-    
-  </ol>
-
-
- <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
-        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
-        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
-        messageStyle: "none"
-    }); 
-    
-</script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-</div>
-
 
             <footer class="footer">
     <span class="footer__copyright">
