@@ -196,11 +196,10 @@ zsh: command not found: ipython
 <p>这样就可以用ipython3了.</p>
 <p><strong>还有一种解决办法:</strong></p>
 <blockquote>
-<p>确保 /Library/Frameworks/Python.framework/Versions/3.6/bin 在你的python路径PATH下</p>
+<p>配置环境变量</p>
 </blockquote>
-<p>添加路径到:<strong>(3.6是你的python版本)</strong></p>
-<pre><code>export PATH=/Library/Frameworks/Python.framework/Versions/3.6/bin:$PATH
-</code></pre><p>这个亲测可用!但是关闭终端,再使用IPython3就不能用了,必须重新输入上面的命令才能使用,是一个治标不治本的办法.</p>
+<p>先查看一下你的 <code>~/.bash_profile</code>文件中是否添加了路径<br><code>export PATH=/Library/Frameworks/Python.framework/Versions/3.6/bin:$PATH</code><br>如果没有,添加进去.<br>这样有可能在你重启终端之后,IPython3还是不好用.这样你需要在<code>~/.bashrc</code>中添加<br><code>source .bash_profile</code><br>如果你的shell是<code>zsh</code>,你可以在<code>~/.zshrc</code>中添加<br>这样在你的终端启动时,就会刷新<code>~/.bash_profile</code>.</p>
+<p>可以阅读以下这篇文章:<br><a href="https://www.jianshu.com/p/e6396fab1879" target="_blank" rel="external">关于OSX的环境变量</a></p>
 <p>以上就是我在mac下安装ipython碰见的问题和解决办法.</p>
 
   </section>
