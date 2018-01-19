@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>图解HTTP学习笔记之了解Web及网络基础 | 日常幻想指南</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图解HTTP学习笔记之了解Web及网络基础 | 日常幻想指南">
+    <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="图解HTTP学习笔记之了解Web及网络基础 | 日常幻想指南">
+    <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
+
+    
+    <meta name="author" content="陈不帅">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/01/19/图解HTTP学习笔记之了解Web及网络基础/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 日常幻想指南 的主页"><img src="/images/logo.jpg" width="80" alt="日常幻想指南 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for 日常幻想指南">日常幻想指南</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">谦虚 谨慎 严肃 活泼</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/image.html">幻想间</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/monniya" title="GitHub" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="Twitter" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-disabled"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-01-19T10:37:15.000Z" class="post-list__meta--date date">2018-01-19</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">图解HTTP学习笔记之了解Web及网络基础</h1>
+  </header>
+
+  <section class="post">
+    <h3 id="1-使用HTTP协议访问Web"><a href="#1-使用HTTP协议访问Web" class="headerlink" title="1.使用HTTP协议访问Web"></a>1.使用HTTP协议访问Web</h3><hr>
+<ul>
+<li>Web使用一种名为HTTP(超文本传输协议)的协议作为规范,完成从客户端到服务器端等一系列运作流程.可以说,Web是建立在HTTP协议上通信的</li>
+</ul>
+<h3 id="2-HTTP的诞生"><a href="#2-HTTP的诞生" class="headerlink" title="2.HTTP的诞生"></a>2.HTTP的诞生</h3><hr>
+<ul>
+<li>1989年3月,HTTP诞生</li>
+<li>现在已经提出了3项WWW构建技术,分别是<code>作为页面的文本标记语言的HTML</code>,<code>作为文档传递协议的HTTP</code>,<code>指定文档所在地址的URL</code></li>
+<li>1997年1月公布的HTTP/1.1是目前主流的HTTP协议版本</li>
+</ul>
+<h3 id="3-网络基础TCP-IP"><a href="#3-网络基础TCP-IP" class="headerlink" title="3.网络基础TCP/IP"></a>3.网络基础TCP/IP</h3><hr>
+<ul>
+<li>TCP/IP协议族<ul>
+<li>TCP/IP是互联网相关的各类协议族的总称</li>
+</ul>
+</li>
+<li>TCP/IP的分层管理<ul>
+<li>TCP/IP协议族里最重要的一点就是分层,分为<strong>应用层</strong>,<strong>传输层</strong>,<strong>网络层</strong>,<strong>数据链路层</strong></li>
+</ul>
+</li>
+<li>应用层<ul>
+<li>应用层决定了向用户提供应用服务时通信的活动.</li>
+<li>TCP/IP协议族内预存了各类通用的应用服务.比如,<code>FTP服务</code>和<code>DNS服务</code>就是其中两类.<code>HTTP协议</code>也是属于该层</li>
+</ul>
+</li>
+<li>传输层<ul>
+<li>传输层提供处于网络连接中的两台计算机之间的数据传输</li>
+<li>在传输层上有两个性质不同的协议:<code>TCP(传输控制协议)</code>和<code>UDP协议(用户数据报协议)</code></li>
+</ul>
+</li>
+<li>网络层(又名网络互连层)<ul>
+<li>网络层用来处理在网络上流动的数据包,该层规定了通过怎样的路径到达对方计算机,并把数据包传送给对方</li>
+<li>在进行网络传输时,它所起的作用就是在众多的选项内选择一条传输路线</li>
+</ul>
+</li>
+<li>链路层(又名数据链路层,网络接口层)<ul>
+<li>用来处理连接网络的硬件部分,硬件上的范畴均在链路层的作用分为之内</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-TCP-IP通信传输流"><a href="#4-TCP-IP通信传输流" class="headerlink" title="4.TCP/IP通信传输流"></a>4.TCP/IP通信传输流</h3><hr>
+<ul>
+<li>利用利用 TCP/IP 协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则往 应用层往上走</li>
+<li>HTTP为例,通信传输的过程:<ol>
+<li>首先作为发送端的客户端在应用层(HTTP 协议)发出一个想看某个 Web 页面的 HTTP 请求。</li>
+<li>接着，为了传输方便，在传输层(TCP 协议)把从应用层处收到的数据(HTTP 请求报文)进行分割，并在 各个报文上打上标记序号及端口号后转发给网络层。</li>
+<li>在网络层(IP 协议)，增加作为通信目的地的 MAC 地址后转发给链路层。这样一来，发往网络的通信请求 就准备齐全了。</li>
+<li>接收端的服务器在链路层接收到数据，按序往上层发送，一直到应用层。当传输到应用层，才能算真正接收 到由客户端发送过来的 HTTP 请求。</li>
+</ol>
+</li>
+<li>送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层 与层传输数据时，每经过一层时会把对应的首部消去。<br>这种把数据信息包装起来的做法称为封装</li>
+</ul>
+<h3 id="5-与HTTP关系密切的协议-IP、TCP和DNS"><a href="#5-与HTTP关系密切的协议-IP、TCP和DNS" class="headerlink" title="5.与HTTP关系密切的协议:IP、TCP和DNS"></a>5.与HTTP关系密切的协议:IP、TCP和DNS</h3><hr>
+<ul>
+<li>负责传输的IP协议<ul>
+<li>IP 协议的作用是把各种数据包传送给对方。而要保证确实传送到对方那里，则需要满足各类条件。其中两个 重要的条件是 IP 地址和 MAC 地址</li>
+<li>使用 ARP 协议凭借 MAC 地址进行通信,ARP 是一种用以解析地址的协议， 根据通信方的 IP 地址就可以反查出对应的 MAC 地址。</li>
+<li>无论哪台计算机、哪台网络设备，它们都无法全面掌握互联网中的细节。</li>
+</ul>
+</li>
+<li>确保可靠性的TCP协议<ul>
+<li>按层次分，TCP 位于传输层，提供可靠的字节流服务</li>
+<li>为了准确无误地将数据送达目标处，TCP 协议采用了三次握手策略:<blockquote>
+<p>发送端首先发送一个带 SYN 标志的数据包给对方。接收端收到后，回传一个带有 SYN/ACK 标志的数据包以 示传达确认信息。最后，发送端再回传一个带 ACK 标志的数据包，代表“握手”结束。<br>若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>负责域名解析的DNS服务<ul>
+<li>DNS服务是和 HTTP 协议一样位于应用层的协议。它提供域名到 IP 地址之间的解析服务。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-各种协议与HTTP协议的关系"><a href="#6-各种协议与HTTP协议的关系" class="headerlink" title="6.各种协议与HTTP协议的关系"></a>6.各种协议与HTTP协议的关系</h3><hr>
+<ul>
+<li>我们来看一下在使用HTTP协议进行通信的过程中,TCP/TP/DNS分别发挥了什么作用:<ol>
+<li>客户端向服务器发送请求</li>
+<li>应用层的DNS服务器解析出域名所对应的IP地址</li>
+<li>HTTP协议的职责:生成针对目标Web服务器的HTTP请求报文</li>
+<li>TCP协议的职责:为了方便通信,将HTTP请求报文分割成报文段,把每个报文段可靠的发送给对方</li>
+<li>IP协议的作用:搜索对方的地址,一边中转一边传送</li>
+<li>在服务器端,TCP协议将从对方那里接受过来的报文段,按照序号重组</li>
+<li>然后HTTP协议,对Web服务器请求的内容进行处理,看对方到底想要什么资源</li>
+<li>请求的处理结果也同样利用TCP/IP通信协议向用户进行回传</li>
+</ol>
+</li>
+</ul>
+<h3 id="7-URI-和-URL"><a href="#7-URI-和-URL" class="headerlink" title="7.URI 和 URL"></a>7.URI 和 URL</h3><hr>
+<ul>
+<li>URI 是统一资源标识符</li>
+<li>URL 是统一资源定位符</li>
+<li>URI 用字符串标识某一互联网资源，而 URL 表示资源的地点(互联网上所处的位置)。可见 URL 是 URI 的 子集。</li>
+</ul>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/01/17/python高级特性之切片/" title="python高级特性之切片">python高级特性之切片</a></h2>
+                <p class="excerpt">
+                
+                取一个list或者tuple的部分元素是非常常见的操作.比如,一个list如下:1&amp;gt;&amp;gt;&amp;gt; L = [&#39;Michael&#39;, &#39;Sarah&#39;, &#39;Tracy&#39;, &#39;Bob&#39;, &#39;Jack&#39;]
+取出前3个元素,应该怎么做?笨办法:12&amp;gt;&amp;gt;&amp;gt; [L[0], L[1], L
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-01-17T11:28:43.000Z" class="post-list__meta--date date">2018-01-17</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/python/">python</a>
+</span><a class="btn-border-small" href="/2018/01/17/python高级特性之切片/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 陈不帅 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
