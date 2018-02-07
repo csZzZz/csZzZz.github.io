@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>图解HTTP学习笔记之HTTP报文内的HTTP信息 | 日常幻想指南</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图解HTTP学习笔记之HTTP报文内的HTTP信息 | 日常幻想指南">
+    <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="图解HTTP学习笔记之HTTP报文内的HTTP信息 | 日常幻想指南">
+    <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
+
+    
+    <meta name="author" content="陈不帅">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/02/07/图解HTTP学习笔记之HTTP报文内的HTTP信息/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 日常幻想指南 的主页"><img src="/images/logo.jpg" width="80" alt="日常幻想指南 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for 日常幻想指南">日常幻想指南</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">谦虚 谨慎 严肃 活泼</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Blogを読む" class="blog-button">Blog</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/image.html">幻想间</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/monniya" title="GitHub" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="Twitter" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-disabled"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-02-07T12:20:30.000Z" class="post-list__meta--date date">2018-02-07</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+ </span>
+      <span class="page-pv">
+       No. <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">图解HTTP学习笔记之HTTP报文内的HTTP信息</h1>
+  </header>
+
+  <section class="post">
+    <h3 id="1-HTTP报文"><a href="#1-HTTP报文" class="headerlink" title="1.HTTP报文"></a>1.HTTP报文</h3><hr>
+<ul>
+<li>用于 HTTP 协议交互的信息被称为 HTTP 报文。请求端(客户端)的 HTTP 报文叫做请求报文，响应端(服务器端)的叫做响应报文。HTTP 报文本身是由多行数据构成的字符串文本.</li>
+<li>HTTP 报文大致可分为报文首部和报文主体两块。两者由最初出现的空行来划分。通常，并不一定要有报文主体。</li>
+</ul>
+<h3 id="2-请求报文及相应报文的结构"><a href="#2-请求报文及相应报文的结构" class="headerlink" title="2.请求报文及相应报文的结构"></a>2.请求报文及相应报文的结构</h3><hr>
+<p><strong>请求报文:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">GET /?logout&amp;u=https://www.baidu.com HTTP/1.1 请求行</div><div class="line">Host: passport.baidu.com</div><div class="line">Connection: keep-alive</div><div class="line">Upgrade-Insecure-Requests: 1</div><div class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</div><div class="line">Referer: https://www.baidu.com/</div><div class="line">Accept-Encoding: gzip, deflate, br</div><div class="line">Accept-Language: zh-CN,zh;q=0.9,en;q=0.8</div><div class="line">Cookie: BIDUPSID=3B6FA44572DB192FFA2483F7BA6C89F8;</div></pre></td></tr></table></figure></p>
+<p><strong>相应报文:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 200 OK  响应行</div><div class="line">Bdpagetype: 1</div><div class="line">Bdqid: 0xc3a38a7c0006794c</div><div class="line">Bduserid: 0</div><div class="line">Cache-Control: private</div><div class="line">Connection: Keep-Alive</div><div class="line">Content-Encoding: gzip</div><div class="line">Content-Type: text/html; charset=utf-8</div><div class="line">Cxy_all: baidu+845a52e771b2866296296807a8522c35</div><div class="line">Date: Wed, 07 Feb 2018 12:36:33 GMT</div><div class="line">Expires: Wed, 07 Feb 2018 12:36:33 GMT</div><div class="line">Server: BWS/1.1</div><div class="line">Set-Cookie: BDSVRTM=12; path=/</div><div class="line">Set-Cookie: BD_HOME=0; path=/</div><div class="line">Set-Cookie: H_PS_PSSID=1465_21124_20928; path=/; domain=.baidu.com</div><div class="line">Strict-Transport-Security: max-age=172800</div><div class="line">Vary: Accept-Encoding</div><div class="line">X-Powered-By: HPHP</div><div class="line">X-Ua-Compatible: IE=Edge,chrome=1</div><div class="line">Transfer-Encoding: chunked</div></pre></td></tr></table></figure></p>
+<ul>
+<li>请求报文和响应报文的首部内容由以下数据组成:<ul>
+<li>请求行:<code>GET /?logout&amp;u=https://www.baidu.com HTTP/1.1</code> 包含用于请求的方法,请求URI和HTTP版本.</li>
+<li>响应行:<code>HTTP/1.1 200 OK</code> 包含表明响应结果的状态码,原因短语和HTTP版本</li>
+<li>首部字段:包含表示请求和响应的各种条件和属性的各类首部.一般有4种首部,分别是<strong>通用首部,请求首部,响应首部,实体首部</strong></li>
+<li>其他:可能包含HTTP的RFC里未定义的首部(Cookie)</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-编码提升传输速率"><a href="#3-编码提升传输速率" class="headerlink" title="3.编码提升传输速率"></a>3.编码提升传输速率</h3><hr>
+<p>HTTP 在传输数据时可以按照数据原貌直接传输，但也可以在传输过程中通过编码提升传输速率。通过在传输时编码，能有效地处理大量的访问请求。但是，编码的操作需要计算机来完成，因此会消耗更多的 CPU 等 资源。</p>
+<ul>
+<li>报文主体和实体主体的差异<ul>
+<li><strong>报文</strong>:是 HTTP 通信中的基本单位，由 8 位组字节流(octet sequence，其中 octet 为 8 个比特)组成，通过 HTTP 通信传输</li>
+<li><strong>实体</strong>:作为请求或响应的有效载荷数据(补充项)被传输，其内容由实体首部和实体主体组成</li>
+</ul>
+</li>
+<li>HTTP 报文的主体用于传输请求或响应的实体主体,通常，报文主体等于实体主体。只有当传输中进行编码操作时，实体主体的内容发生变化，才导致它和报文 主体产生差异。</li>
+<li><p>压缩传输的内容编码</p>
+<ul>
+<li>内容编码指明应用在实体内容上的编码格式，并保持实体信息原样压缩。内容编码后的实体由客户端接收并负责解码.</li>
+<li><p>内容编码有一下几种:</p>
+<blockquote>
+<p><strong>gzip(GNU zip)</strong>,<br><strong>compress(UNIX系统的标准压缩)</strong>,<br><strong>deflate(zlib)</strong>,<br><strong>identity(不进行编码)</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>分割发送的分块传输编码</p>
+<ul>
+<li>在传输大容量数据时，通过把数据分割成多块，能够让浏览器逐步显示页面,这种把实体分块的功能成为分块传输编码</li>
+<li>使用分块传输编码的实体主体会由接收的客户端负责解码，恢复到编码前的实体主体,实体主体的最后一块会使用“0(CR+LF)”来标记。</li>
+<li>HTTP/1.1 中存在一种称为传输编码(Transfer Coding)的机制，它可以在通信时按某种编码方式传输，但 只定义作用于分块传输编码中。</li>
+</ul>
+</li>
+<li><p>发送多种数据的多部分对象集合</p>
+<ul>
+<li>HTTP 协议中采纳了多部分对象集合，发送的一份报文主体内可含有多类型实体。通常是在图片或文本文件等上传时使用.</li>
+<li><p>多部分对象集合包含的对象如下:</p>
+<blockquote>
+<p><strong>multipart/form-data</strong> 在 Web 表单文件上传时使用。<br><strong>multipart/byteranges</strong> 状态码 206(Partial Content，部分内容)响应报文包含了多个范围的内容时使用。<br><strong>multipart/form-data</strong><br><strong>multipart/byteranges</strong></p>
+</blockquote>
+</li>
+<li><p>在 HTTP 报文中使用多部分对象集合时，需要在首部字段里加上 Content-type</p>
+</li>
+</ul>
+</li>
+<li><p>获取部分内容的范围请求</p>
+<ul>
+<li><p>所谓恢复是指能从之前下载中断处恢复下载。要实现该功能需要指定下载的实体范围。像这样，指定范围发送的请求叫做范围请求(Range Request)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Range:bytes=5001-10000 请求5001~10000字节</div></pre></td></tr></table></figure>
+</li>
+<li><p>针对范围请求，响应会返回状态码为 206 Partial Content 的响应报文</p>
+</li>
+</ul>
+</li>
+<li><p>内容协商返回最合适的内容</p>
+<ul>
+<li>当浏览器的默认语言为英语或中文，访问相同 URI 的 Web 页面时，则会显示对应的英语版或中文版的Web页面。这样的机制称为内容协商</li>
+<li>内容协商机制是指客户端和服务器端就响应的资源内容进行交涉，然后提供给客户端最为适合的资源。内容协商会以响应资源的语言、字符集、编码方式等作为判断的基准</li>
+<li><p>包含在请求报文中的某些首部字段就是判断的基准:</p>
+<blockquote>
+<p>Accept<br>Accept-Charset<br>Accept-Encoding<br>Accept-Language<br>Content-Language</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>内容协商机制有一下3种类型:</p>
+<ul>
+<li>服务器驱动协商<blockquote>
+<p>由服务器端进行内容协商。以请求的首部字段为参考，在服务器端自动处理。但对用户来说，以浏览器发送 的信息作为判定的依据，并不一定能筛选出最优内容</p>
+</blockquote>
+</li>
+<li>客户端驱动协商<blockquote>
+<p>由客户端进行内容协商的方式。用户从浏览器显示的可选项列表中手动选择。还可以利用 JavaScript 脚本在Web 页面上自动进行上述选择。比如按 OS 的类型或浏览器类型，自行切换成 PC 版页面或手机版页面</p>
+</blockquote>
+</li>
+<li>透明协商<blockquote>
+<p>是服务器驱动和客户端驱动的结合体，是由服务器端和客户端各自进行内容协商的一种方法。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">以前の記事</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/01/20/图解HTTP学习笔记之简单的HTTP协议/" title="图解HTTP学习笔记之简单的HTTP协议">图解HTTP学习笔记之简单的HTTP协议</a></h2>
+                <p class="excerpt">
+                
+                1.HTTP协议用于客户端和服务端之间的通信
+
+请求访问文本或图像等资源的一端称为客户端，而提供资源响应的一端称为服务器端
+应用 HTTP 协议时，必定是一端担任客户端角色，另一端担任服务器端角色
+
+2.通过请求和响应的交换达成通信
+
+HTTP 协议规定，请求从客户端发出，最后服务器端响应该请求并返
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-01-19T16:24:15.000Z" class="post-list__meta--date date">2018-01-20</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+</span><a class="btn-border-small" href="/2018/01/20/图解HTTP学习笔记之简单的HTTP协议/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 陈不帅 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
