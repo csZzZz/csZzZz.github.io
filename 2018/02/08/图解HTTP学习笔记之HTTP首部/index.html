@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>图解HTTP学习笔记之HTTP首部 | 日常幻想指南</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图解HTTP学习笔记之HTTP首部 | 日常幻想指南">
+    <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="图解HTTP学习笔记之HTTP首部 | 日常幻想指南">
+    <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
+
+    
+    <meta name="author" content="陈不帅">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/02/08/图解HTTP学习笔记之HTTP首部/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 日常幻想指南 的主页"><img src="/images/logo.jpg" width="80" alt="日常幻想指南 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for 日常幻想指南">日常幻想指南</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">谦虚 谨慎 严肃 活泼</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/image.html">幻想间</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/csZzZz" title="GitHub" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="Twitter" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-disabled"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-02-08T11:21:33.000Z" class="post-list__meta--date date">2018-02-08</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">图解HTTP学习笔记之HTTP首部</h1>
+  </header>
+
+  <section class="post">
+    <h3 id="1-HTTP报文首部"><a href="#1-HTTP报文首部" class="headerlink" title="1.HTTP报文首部"></a>1.HTTP报文首部</h3><hr>
+<blockquote>
+<p>HTTP 协议的请求和响应报文中必定包含 HTTP 首部。首部内容为客户端和服务器分别处理请求和响应提供所需要的信息</p>
+</blockquote>
+<ul>
+<li><strong>HTTP请求报文</strong><ul>
+<li>在请求中，HTTP 报文由方法、URI、HTTP 版本、HTTP 首部字段等部分构成。</li>
+</ul>
+</li>
+<li><strong>HTTP响应报文</strong><ul>
+<li>在响应中，HTTP 报文由 HTTP 版本、状态码(数字和原因短语)、HTTP 首部字段 3 部分构成。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-HTTP首部字段"><a href="#2-HTTP首部字段" class="headerlink" title="2.HTTP首部字段"></a>2.HTTP首部字段</h3><hr>
+<ul>
+<li><strong>HTTP首部字段传递重要信息</strong><ul>
+<li>HTTP 首部字段是构成 HTTP 报文的要素之一。在客户端与服务器之间以 HTTP 协议进行通信的过程中，无 论是请求还是响应都会使用首部字段，它能起到传递额外重要信息的作用。</li>
+</ul>
+</li>
+<li><p><strong>HTTP首部字段结构</strong></p>
+<ul>
+<li>HTTP 首部字段是由首部字段名和字段值构成的，中间用冒号“:” 分隔。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">首部字段名: 字段值  Content-Type: text/html</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>4种HTTP首部字段类型</strong></p>
+<ul>
+<li><strong>通用首部字段</strong>: 请求报文和响应报文两方都会使用的首部</li>
+<li><strong>请求首部字段</strong>: 从客户端向服务器端发送请求报文时使用的首部。补充了请求的附加内容、客户端信息、响应内容相关优先</li>
+<li><strong>响应首部字段</strong>: 从服务器端向客户端返回响应报文时使用的首部。补充了响应的附加内容，也会要求客户端附加额外的内容</li>
+<li><strong>实体首部字段</strong>: 针对请求报文和响应报文的实体部分使用的首部。补充了资源内容更新时间等与实体有关的信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-HTTP-1-1通用首部字段"><a href="#3-HTTP-1-1通用首部字段" class="headerlink" title="3.HTTP/1.1通用首部字段"></a>3.HTTP/1.1通用首部字段</h3><hr>
+<blockquote>
+<p>通用首部字段是指，请求报文和响应报文双方都会使用的首部。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">首部字段名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cache-Control</td>
+<td style="text-align:left">控制缓存的行为</td>
+</tr>
+<tr>
+<td style="text-align:left">Connection</td>
+<td style="text-align:left">逐跳首部,连接的管理</td>
+</tr>
+<tr>
+<td style="text-align:left">Date</td>
+<td style="text-align:left">创建报文的日期</td>
+</tr>
+<tr>
+<td style="text-align:left">Pragma</td>
+<td style="text-align:left">报文指令</td>
+</tr>
+<tr>
+<td style="text-align:left">Trailer</td>
+<td style="text-align:left">报文末端的首部一览</td>
+</tr>
+<tr>
+<td style="text-align:left">Transfer-Encoding</td>
+<td style="text-align:left">指定报文主体的传输编码方式</td>
+</tr>
+<tr>
+<td style="text-align:left">Upgrade</td>
+<td style="text-align:left">升级为其他协议</td>
+</tr>
+<tr>
+<td style="text-align:left">Via</td>
+<td style="text-align:left">代理服务器的相关信息</td>
+</tr>
+<tr>
+<td style="text-align:left">Warning</td>
+<td style="text-align:left">错误通知</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong>Cache-Control</strong></p>
+<ul>
+<li><p>通过指定首部字段 Cache-Control 的指令，就能操作缓存的工作机制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: private, max-age=0, no-cache</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>public指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control:public</div><div class="line"># 当指定使用 public 指令时，则明确表明其他用户也可利用缓存。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>private指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cache-Contrlo: private</div><div class="line"># 当指定 private 指令后，响应只以特定的用户作为对象.</div><div class="line"># 缓存服务器会对该特定用户提供资源缓存的服务，对于其他用户发送过来的请求，代理服务器则不会返回缓存</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>no-cache指令</strong></p>
+<blockquote>
+<p>使用 no-cache 指令的目的是为了防止从缓存中返回过期的资源。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: no-cache</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>客户端</strong>发送的请求中如果包含 no-cache 指令，则表示客户端将不会接收缓存过的响应。于是，“中间”的缓存服务器必须把客户端请求转发给源服务器。</p>
+<p>如果<strong>服务器</strong>返回的响应中包含 no-cache 指令，那么缓存服务器不能对资源进行缓存。源服务器以后也将不再 对缓存服务器请求中提出的资源有效性进行确认，且禁止其对响应资源进行缓存操作</p>
+</blockquote>
+</li>
+<li><p><strong>no-store指令 控制可执行缓存的对象的指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control:no-store</div><div class="line"># 该指令规定缓存不能在本地存储请求或响应的任一部分。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>max-age指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: max-age=604800(单位:秒)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>当<strong>客户端</strong>发送的请求中包含 max-age 指令时，如果判定缓存资源的缓存时间数值比指定时间的数值更小，那 么客户端就接收缓存的资源。另外，当指定 max-age 值为 0，那么缓存服务器通常需要将请求转发给源服务 器。<br>当<strong>服务器</strong>返回的响应中包含 max-age 指令时，缓存服务器将不对资源的有效性再作确认，而 max-age 数值 代表资源保存为缓存的最长时间。</p>
+</blockquote>
+</li>
+<li><p><strong>s-maxage指令 指定缓存期限和认证的指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: s-maxage=604800(单位 :秒)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>s-maxage 指令的功能和 max-age 指令的相同，它们的不同点是 s-maxage 指令只适用于供多位用户使用的公共缓存服务器</p>
+</blockquote>
+</li>
+<li><p><strong>min-fresh指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control: min-fresh=60(单位:秒)</div><div class="line"># min-fresh 指令要求缓存服务器返回至少还未过指定时间的缓存资源。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>max-stale指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control: max-stale=3600(单位:秒)</div><div class="line"># 使用 max-stale 可指示缓存资源，即使过期也照常接收。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>only-if-cached指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control: only-if-cached</div><div class="line"># 使用 only-if-cached 指令表示客户端仅在缓存服务器本地缓存目标资源的情况下才会要求其返回。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>must-revalidate 指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control: must-revalidate</div><div class="line"># 使用 must-revalidate 指令，代理会向源服务器再次验证即将返回的响应缓存目前是否仍然有效。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>proxy-revalidate指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control: proxy-revalidate</div><div class="line"># proxy-revalidate 指令要求所有的缓存服务器在接收到客户端带有该指令的请求返回响应之前，必须再次验证缓存的有效性</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>no-transform 指令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control: no-transform</div><div class="line"># 使用 no-transform 指令规定无论是在请求还是响应中，缓存都不能改变实体主体的媒体类型。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Cache-Control扩展</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cache-Control: private, community=&quot;UCI&quot;</div><div class="line"># 通过 cache-extension 标记(token)，可以扩展 Cache-Control 首部字段内的指令。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>Connection</strong></p>
+<ul>
+<li><p><strong>控制不再转发给代理的首部字段</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Connection: 不再转发的首部字段名</div><div class="line"># 在客户端发送请求和服务器返回响应内，使用 Connection 首部字段，可控制不再转发给代理的首部字段</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>管理持久连接</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Connection: close</div><div class="line"># 当服务器端想明 确断开连接时，则指定 Connection 首部字段的值为 Close。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>Date</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>首部字段 Date 表明创建 HTTP 报文的日期和时间。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Date: Tue, 03 Jul 2012 04:40:59 GMT</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>pragma</strong></li>
+</ul>
+<blockquote>
+<p>Pragma 是 HTTP/1.1 之前版本的历史遗留字段，仅作为与 HTTP/1.0 的向后兼容而定义。</p>
+</blockquote>
+<ul>
+<li><strong>Trailer</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 Trailer 会事先说明在报文主体后记录了哪些首部字段。该首部字段可应用在 HTTP/1.1 版本分块传输编码时。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Trailer: Expires</div><div class="line">...(报文主体)...</div><div class="line">0</div><div class="line">Expires: Tue, 28 Sep 2004 23:59:59 GMT</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Transfer-Encoding</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 Transfer-Encoding 规定了传输报文主体时采用的编码方式。</p>
+</blockquote>
+<ul>
+<li><strong>Upgrade</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 Upgrade 用于检测 HTTP 协议及其他协议是否可使用更高的版本进行通信，其参数值可以用来指定一个完全不同的通信协议</p>
+</blockquote>
+<ul>
+<li><strong>Via</strong></li>
+</ul>
+<blockquote>
+<p>使用首部字段 Via 是为了追踪客户端与服务器之间的请求和响应报文的传输路径。<br>首部字段 Via 不仅用于追踪报文的转发，还可避免请求回环的发生。所以必须在经过代理时附加该首部字段内容</p>
+</blockquote>
+<ul>
+<li><strong>Warning</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Warning: [警告码][警告的主机:端口号]“[警告内容]”([日期时间])</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>HTTP/1.1警告码</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">警告码</th>
+<th style="text-align:left">警告内容</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">110</td>
+<td style="text-align:left">Response is stale(响应已过期)</td>
+<td style="text-align:left">代理返回已过期的资源</td>
+</tr>
+<tr>
+<td style="text-align:left">111</td>
+<td style="text-align:left">Revalidation failed(再验证失败)</td>
+<td style="text-align:left">代理再验证资源有效性时失败(服务器无法到达等原因)</td>
+</tr>
+<tr>
+<td style="text-align:left">112</td>
+<td style="text-align:left">Disconnection operation(断开连接操作)</td>
+<td style="text-align:left">代理与互联网连接被故意切断</td>
+</tr>
+<tr>
+<td style="text-align:left">113</td>
+<td style="text-align:left">Heuristic expiration(试探性过期)</td>
+<td style="text-align:left">响应的使用期超过24小时(有效缓存的设定时间大于24小时的情况下)</td>
+</tr>
+<tr>
+<td style="text-align:left">199</td>
+<td style="text-align:left">Miscellaneous warning(杂项警告)</td>
+<td style="text-align:left">任意的警告内容</td>
+</tr>
+<tr>
+<td style="text-align:left">214</td>
+<td style="text-align:left">Transformation applied(使用了转换)</td>
+<td style="text-align:left">代理对内容编码或媒体类型等执行了某些处理时</td>
+</tr>
+<tr>
+<td style="text-align:left">299</td>
+<td style="text-align:left">Miscellaneous persistent warning(持久 杂项警告)</td>
+<td style="text-align:left">任意的警告内容</td>
+</tr>
+</tbody>
+</table>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/02/08/图解HTTP学习笔记之于HTTP协作的Web服务器/" title="图解HTTP学习笔记之于HTTP协作的Web服务器">图解HTTP学习笔记之于HTTP协作的Web服务器</a></h2>
+                <p class="excerpt">
+                
+                
+一台Web服务器可搭建多个独立域名的Web网站,也可作为通信路径上中转服务器提升传输效率
+
+1.用单台虚拟主机实现多个域名
+
+HTTP/1.1 规范允许一台 HTTP 服务器搭建多个 Web 站点,这是因为利用了虚拟主机(Virtual Host，又称虚拟服务器)的功能
+在相同的 IP 地址下，由
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-02-07T17:43:44.000Z" class="post-list__meta--date date">2018-02-08</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+</span><a class="btn-border-small" href="/2018/02/08/图解HTTP学习笔记之于HTTP协作的Web服务器/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 陈不帅 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
