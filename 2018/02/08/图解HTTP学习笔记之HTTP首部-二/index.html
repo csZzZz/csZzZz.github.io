@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>图解HTTP学习笔记之HTTP首部(二) | 日常幻想指南</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图解HTTP学习笔记之HTTP首部(二) | 日常幻想指南">
+    <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="图解HTTP学习笔记之HTTP首部(二) | 日常幻想指南">
+    <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
+
+    
+    <meta name="author" content="陈不帅">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/02/08/图解HTTP学习笔记之HTTP首部-二/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 日常幻想指南 的主页"><img src="/images/logo.jpg" width="80" alt="日常幻想指南 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for 日常幻想指南">日常幻想指南</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">谦虚 谨慎 严肃 活泼</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/image.html">幻想间</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/csZzZz" title="GitHub" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="Twitter" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-disabled"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-02-08T12:47:46.000Z" class="post-list__meta--date date">2018-02-08</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">图解HTTP学习笔记之HTTP首部(二)</h1>
+  </header>
+
+  <section class="post">
+    <blockquote>
+<p>这一章主要介绍请求首部字段</p>
+</blockquote>
+<h3 id="请求首部字段"><a href="#请求首部字段" class="headerlink" title="请求首部字段"></a>请求首部字段</h3><hr>
+<blockquote>
+<p>请求首部字段是从客户端往服务器端发送请求报文中所使用的字段，用于补充请求的附加信息、客户端信息、对响应内容相关的优先级等内容。</p>
+</blockquote>
+<p><strong>请求首部字段表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">首部字段名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Accept</td>
+<td style="text-align:left">用户代理可处理的媒体类型</td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Charset</td>
+<td style="text-align:left">优先的字符集</td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Encoding</td>
+<td style="text-align:left">优先的内容编码</td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Language</td>
+<td style="text-align:left">优先的语言(自然语言)</td>
+</tr>
+<tr>
+<td style="text-align:left">Authorization</td>
+<td style="text-align:left">Web认证信息</td>
+</tr>
+<tr>
+<td style="text-align:left">Expect</td>
+<td style="text-align:left">期待服务器的特定行为</td>
+</tr>
+<tr>
+<td style="text-align:left">From</td>
+<td style="text-align:left">用户的电子邮箱地址</td>
+</tr>
+<tr>
+<td style="text-align:left">Host</td>
+<td style="text-align:left">请求资源所在服务器</td>
+</tr>
+<tr>
+<td style="text-align:left">If-Match</td>
+<td style="text-align:left">比较实体标记(ETag)</td>
+</tr>
+<tr>
+<td style="text-align:left">If-Modified-Since</td>
+<td style="text-align:left">比较资源的更新时间</td>
+</tr>
+<tr>
+<td style="text-align:left">If-None-Match</td>
+<td style="text-align:left">比较实体标记(与 If-Match 相反)</td>
+</tr>
+<tr>
+<td style="text-align:left">If-Range</td>
+<td style="text-align:left">资源未更新时发送实体 Byte 的范围请求</td>
+</tr>
+<tr>
+<td style="text-align:left">If-Unmodified-Since</td>
+<td style="text-align:left">比较资源的更新时间(与If-Modified-Since相反</td>
+</tr>
+<tr>
+<td style="text-align:left">Max-Forwards</td>
+<td style="text-align:left">最大传输逐跳数</td>
+</tr>
+<tr>
+<td style="text-align:left">Proxy-Authorization</td>
+<td style="text-align:left">代理服务器要求客户端的认证信息</td>
+</tr>
+<tr>
+<td style="text-align:left">Range</td>
+<td style="text-align:left">实体的字节范围请求</td>
+</tr>
+<tr>
+<td style="text-align:left">Referer</td>
+<td style="text-align:left">对请求中 URI 的原始获取方</td>
+</tr>
+<tr>
+<td style="text-align:left">TE</td>
+<td style="text-align:left">传输编码的优先级</td>
+</tr>
+<tr>
+<td style="text-align:left">User-Agent</td>
+<td style="text-align:left">HTTP 客户端程序的信息</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<ul>
+<li><strong>Accept</strong></li>
+</ul>
+<blockquote>
+<p>Accept 首部字段可通知服务器，用户代理能够处理的媒体类型及媒体类型的相对优先级</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</div></pre></td></tr></table></figure>
+<blockquote>
+<p>若想要给显示的媒体类型增加优先级，则使用 q= 来额外表示权重值 1，用分号(;)进行分隔。权重值 q 的范围是 0~1(可精确到小数点后 3 位)，且 1 为最大值。不指定权重 q 值时，默认权重为 q=1.0。</p>
+</blockquote>
+<pre><code>文本文件: `text/html, text/plain, text/css ...`
+图片文件: `image/jpeg, image/gif, image/png ...`
+视频文件: `video/mpeg, video/quicktime ...`
+应用程序使用的二进制文件: `application/octet-stream, application/zip ...`
+</code></pre><ul>
+<li><strong>Accept-Charset</strong> </li>
+</ul>
+<blockquote>
+<p>该首部字段应用于内容协商机制的服务器驱动协商。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Accept-Charset: iso-8859-5, unicode-1-1;q=0.8</div><div class="line"># Accept-Charset 首部字段可用来通知服务器用户代理支持的字符集及字符集的相对优先顺序</div><div class="line"># q表示相对优先级</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Accept-Encoding</strong></li>
+</ul>
+<blockquote>
+<p>Accept-Encoding 首部字段用来告知服务器用户代理支持的内容编码及内容编码的优先级顺序</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Accept-Encoding: gzip, deflate</div><div class="line"># 内容编码的格式:gzip,compress,deflate,identity</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Accept-Language</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 Accept-Language 用来告知服务器用户代理能够处理的自然语言集(指中文或英文等)，以及自然 语言集的相对优先级</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Accept-Language: zh-cn,zh;q=0.7,en-us,en;q=0.3</div><div class="line"># q表示相对优先级</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Authorization</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 Authorization 是用来告知服务器，用户代理的认证信息(证书值)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Authorization: Basic dWVub3NlbjpwYXNzd29yZA==</div><div class="line"># 通常，想要通过服务器认证的 用户代理会在接收到返回的 401 状态码响应后，把首部字段 Authorization 加入请求中</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Expect</strong></li>
+</ul>
+<blockquote>
+<p>客户端使用首部字段 Expect 来告知服务器，期望出现的某种特定行为。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Expect: 100-continue</div><div class="line"># 等待状态码 100 响应的客户端在发生请求时，需要指定 Expect:100-continue。</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>From</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 From 用来告知服务器使用用户代理的用户的电子邮件地址</p>
+</blockquote>
+<ul>
+<li><strong>Host</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 Host 会告知服务器，请求的资源所处的互联网主机名和端口号</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Host: www.hackr.jp</div><div class="line"># 虚拟主机运行在同一个 IP 上，因此使用首部字段 Host 加以区分</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>If-Match</strong></li>
+</ul>
+<blockquote>
+<p>形如 If-xxx 这种样式的请求首部字段，都可称为条件请求</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">If-Match: &quot;123456&quot;</div><div class="line"># 只有当 If-Match 的字段值跟 ETag (实体标记)值匹配一致时，服务器才会接受请求</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>If-Modified-Since</strong></li>
+</ul>
+<blockquote>
+<p>它会告知服务器若 If-Modified-Since 字段值早于资源的更新 时间，则希望能处理该请求</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">If-Modified-Since: Thu, 15 Apr 2004 00:00:00 GMT</div><div class="line"># 如果在 If-Modified-Since 字段指定的日期时间后，资源发生了更新，服务器会接受请求</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>If-None-Match</strong></li>
+</ul>
+<blockquote>
+<p>它和首部字段 If-Match 作用相反。用于指定 If-None-Match 字 段值的实体标记(ETag)值与请求资源的 ETag 不一致时，它就告知服务器处理该请求</p>
+</blockquote>
+<ul>
+<li><strong>If-Range</strong></li>
+</ul>
+<blockquote>
+<p>它告知服务器若指定的 If-Range 字段值(ETag 值或者时间)和请求 资源的 ETag 值或时间相一致时，则作为范围请求处理。反之，则返回全体资源</p>
+</blockquote>
+<ul>
+<li><strong>If-Unmodified-Since</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 If-Unmodified-Since 和首部字段 If-Modified-Since 的作用相反。它的作用的是告知服务器，指定的 请求资源只有在字段值内指定的日期时间之后，未发生更新的情况下,才能处理请求</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">If-Unmodified-Since: Thu, 03 Jul 2012 00:00:00 GMT</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Max-Forwards</strong></li>
+</ul>
+<blockquote>
+<p>通过 TRACE 方法或 OPTIONS 方法，发送包含首部字段 Max-Forwards 的请求时，该字段以十进制整数形式 指定可经过的服务器最大数目。服务器在往下一个服务器转发请求之前，Max-Forwards 的值减 1 后重新赋值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Max-Forwards: 10</div><div class="line"># 每次转发数值减 1。当数值变 0 时返回响应</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Proxy-Authorization</strong></li>
+</ul>
+<blockquote>
+<p>收到从代理服务器发来的认证质询时，客户端会发送包含首部字段 Proxy-Authorization 的请求，以告知服 务器认证所需要的信息。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Proxy-Authorization: Basic dGlwOjkpNLAGfFY5</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Range</strong></li>
+</ul>
+<blockquote>
+<p>对于只需获取部分资源的范围请求，包含首部字段 Range 即可告知服务器资源的指定范围</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Range: bytes=5001-10000</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Referer</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 Referer 会告知服务器请求的原始资源的 URI。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Referer: http://www.hackr.jp/index.htm</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>TE</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 TE 会告知服务器客户端能够处理响应的传输编码方式及相对优先级</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TE: gzip, deflate;q=0.5</div></pre></td></tr></table></figure>
+<blockquote>
+<p>首部字段 TE 除指定传输编码之外，还可以指定伴随 trailer 字段的分块传输编码的方式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TE: trailers</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>User-Agent</strong></li>
+</ul>
+<blockquote>
+<p>首部字段 User-Agent 会将创建请求的浏览器和用户代理名称等信息传达给服务器</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:13.0) Gecko/20100101 Firefox/13.0.1</div></pre></td></tr></table></figure>
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/02/08/图解HTTP学习笔记之HTTP首部/" title="图解HTTP学习笔记之HTTP首部">图解HTTP学习笔记之HTTP首部</a></h2>
+                <p class="excerpt">
+                
+                1.HTTP报文首部
+
+HTTP 协议的请求和响应报文中必定包含 HTTP 首部。首部内容为客户端和服务器分别处理请求和响应提供所需要的信息
+
+
+HTTP请求报文
+在请求中，HTTP 报文由方法、URI、HTTP 版本、HTTP 首部字段等部分构成。
+
+
+HTTP响应报文
+在响应中，HTTP 报文由
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-02-08T11:21:33.000Z" class="post-list__meta--date date">2018-02-08</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+</span><a class="btn-border-small" href="/2018/02/08/图解HTTP学习笔记之HTTP首部/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 陈不帅 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
