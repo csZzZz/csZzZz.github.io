@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>图解HTTP学习笔记之构建Web内容的技术 | 日常幻想指南</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图解HTTP学习笔记之构建Web内容的技术 | 日常幻想指南">
+    <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="图解HTTP学习笔记之构建Web内容的技术 | 日常幻想指南">
+    <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
+
+    
+    <meta name="author" content="陈不帅">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/02/10/图解HTTP学习笔记之构建Web内容的技术/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 日常幻想指南 的主页"><img src="/images/logo.jpg" width="80" alt="日常幻想指南 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for 日常幻想指南">日常幻想指南</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">谦虚 谨慎 严肃 活泼</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/image.html">幻想间</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/csZzZz" title="GitHub" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="Twitter" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-disabled"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-02-09T16:42:18.000Z" class="post-list__meta--date date">2018-02-10</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">图解HTTP学习笔记之构建Web内容的技术</h1>
+  </header>
+
+  <section class="post">
+    <h3 id="1-HTML"><a href="#1-HTML" class="headerlink" title="1.HTML"></a>1.HTML</h3><hr>
+<ul>
+<li><strong>Web页面几乎全由HTML构建</strong></li>
+</ul>
+<blockquote>
+<p>HTML(HyperText Markup Language，超文本标记语言)是为了发送 Web 上的超文本(Hypertext)而开发 的标记语言</p>
+</blockquote>
+<ul>
+<li><strong>CSS</strong></li>
+</ul>
+<blockquote>
+<p>CSS(Cascading Style Sheets，层叠样式表)可以指定如何展现 HTML 内的各种元素，属于样式表标准之 一</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.logo</span> &#123;</div><div class="line"><span class="attribute">padding</span>: <span class="number">20px</span>; <span class="attribute">text-align</span>: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-动态HTML"><a href="#2-动态HTML" class="headerlink" title="2.动态HTML"></a>2.动态HTML</h3><hr>
+<ul>
+<li><strong>让 Web 页面动起来的动态 HTML</strong></li>
+</ul>
+<blockquote>
+<p>动态 HTML 技术是通过调用客户端脚本语言 JavaScript，实现对 HTML 的 Web 页面的动态改造</p>
+</blockquote>
+<ul>
+<li><strong>更易控制 HTML 的 DOM</strong></li>
+</ul>
+<blockquote>
+<p>OM 是用以操作 HTML 文档和 XML 文档的 API</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">  <span class="keyword">var</span> content = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'P'</span>);</div><div class="line">  content[<span class="number">2</span>].style.color = <span class="string">'#FF0000'</span>;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="3-Web应用"><a href="#3-Web应用" class="headerlink" title="3,Web应用"></a>3,Web应用</h3><hr>
+<ul>
+<li><strong>与Web服务器及程序协作的CGI</strong></li>
+</ul>
+<blockquote>
+<p>CGI(Common Gateway Interface，通用网关接口)是指 Web 服务器在接收到客户端发送过来的请求后转发 给程序的一组机制</p>
+</blockquote>
+<ul>
+<li><strong>Servlet</strong></li>
+</ul>
+<blockquote>
+<p>ervlet1 是一种能在服务器上创建动态内容的程序。Servlet 是用 Java 语言实现的一个接口.<br>之前提及的 CGI，由于每次接到请求，程序都要跟着启动一次。因此一旦访问量过大，Web 服务器要承担相 当大的负载。而 Servlet 运行在与 Web 服务器相同的进程中，因此受到的负载较小 2。Servlet 的运行环境叫 做 Web 容器或 Servlet 容器</p>
+</blockquote>
+<h3 id="4-数据发布的格式及语言"><a href="#4-数据发布的格式及语言" class="headerlink" title="4.数据发布的格式及语言"></a>4.数据发布的格式及语言</h3><hr>
+<ul>
+<li><strong>可扩展标记语言XML</strong></li>
+</ul>
+<blockquote>
+<p>XML(eXtensible Markup Language，可扩展标记语言)是一种可按应用目标进行扩展的通用标记语言。旨 在通过使用 XML，使互联网数据共享变得更容易</p>
+</blockquote>
+<ul>
+<li><strong>发布更新信息的 RSS/Atom</strong></li>
+</ul>
+<blockquote>
+<p>RSS(简易信息聚合，也叫聚合内容)和 Atom 都是发布新闻或博客日志等更新信息文档的格式的总称。两 者都用到了 XML</p>
+</blockquote>
+<ul>
+<li><strong>JavaScript衍生的轻量级易用JSON</strong></li>
+</ul>
+<blockquote>
+<p>JSON(JavaScript Object Notation)是一种以 JavaScript(ECMAScript)的对象表示法为基础的轻量级数据标记语言。<br>能够处理的数据类型有 false/null/true/ 对象 / 数组 / 数字 / 字符串，这 7 种类型</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;name&quot;: &quot;Web Application Security&quot;, &quot;num&quot;: &quot;TR001&quot;&#125;</div></pre></td></tr></table></figure>
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/02/09/图解HTTP学习笔记之基于HTTP的功能追加协议/" title="图解HTTP学习笔记之基于HTTP的功能追加协议">图解HTTP学习笔记之基于HTTP的功能追加协议</a></h2>
+                <p class="excerpt">
+                
+                
+虽然 HTTP 协议既简单又简捷，但随着时代的发展，其功能使用上捉襟见肘的疲态已经凸显
+1.HTTP协议的瓶颈
+
+一条连接上只可发送一个请求。 
+请求只能从客户端开始。客户端不可以接收除响应以外的指令。
+请求 / 响应首部未经压缩就发送。首部信息越多延迟越大。 
+发送冗长的首部。每次互相发送相同的
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-02-09T10:59:04.000Z" class="post-list__meta--date date">2018-02-09</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+</span><a class="btn-border-small" href="/2018/02/09/图解HTTP学习笔记之基于HTTP的功能追加协议/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 陈不帅 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
