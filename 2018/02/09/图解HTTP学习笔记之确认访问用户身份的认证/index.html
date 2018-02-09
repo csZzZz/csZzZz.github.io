@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="z">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>图解HTTP学习笔记之确认访问用户身份的认证 | 日常幻想指南</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图解HTTP学习笔记之确认访问用户身份的认证 | 日常幻想指南">
+    <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="图解HTTP学习笔记之确认访问用户身份的认证 | 日常幻想指南">
+    <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
+
+    
+    <meta name="author" content="陈不帅">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/02/09/图解HTTP学习笔记之确认访问用户身份的认证/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 日常幻想指南 的主页"><img src="/images/logo.jpg" width="80" alt="日常幻想指南 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for 日常幻想指南">日常幻想指南</a></h1>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">谦虚 谨慎 严肃 活泼</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+            
+              <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
+            
+              <li class="navigation__item"><a href="/favourite/image.html">幻想间</a></li>
+            
+              <li class="navigation__item"><a href="/aboutme">关于我</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/csZzZz" title="GitHub" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/onlymonniya" title="Twitter" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-disabled"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-02-09T10:12:44.000Z" class="post-list__meta--date date">2018-02-09</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+ </span>
+      <span class="page-pv">
+       Read <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">图解HTTP学习笔记之确认访问用户身份的认证</h1>
+  </header>
+
+  <section class="post">
+    <blockquote>
+<p>某些 Web 页面只想让特定的人浏览，或者干脆仅本人可见。为达到这个目标，必不可少的就是认证功能</p>
+</blockquote>
+<h3 id="HTTP使用的认证方式"><a href="#HTTP使用的认证方式" class="headerlink" title="HTTP使用的认证方式"></a>HTTP使用的认证方式</h3><hr>
+<ul>
+<li><strong>BASIC认证</strong><ol>
+<li>当请求的资源需要 BASIC 认证时，服务器会随状态码 401 Authorization Required，返回带 WWW- Authenticate 首部字段的响应。该字段内包含认证的方式(BASIC) 及 Request-URI 安全域字符串 (realm)。</li>
+<li>接收到状态码 401 的客户端为了通过 BASIC 认证，需要将用户 ID 及密码发送给服务器。发送的字 符串内容是由用户 ID 和密码构成，两者中间以冒号(:)连接后，再经过 Base64 编码处理</li>
+<li>接收到包含首部字段 Authorization 请求的服务器，会对认证信息的正确性进行验证。如验证通过， 则返回一条包含 Request-URI 资源的响应</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>BASIC 认证使用上不够便捷灵活，且达不到多数 Web 网站期望的安全性等级，因此它并不常用.<br>想再进行一次 BASIC 认证时，一般的浏览器却无法实现认证注销操作.</p>
+</blockquote>
+<ul>
+<li><strong>DIGEST认证</strong><ul>
+<li>DIGEST 认证同样使用质询 / 响应的方式(challenge/response)，但不会像 BASIC 认证那样直接发送明文密码</li>
+<li>所谓质询响应方式是指，一开始一方会先发送认证要求给另一方，接着使用从另一方那接收到的质询码计算生成响应码。最后将响应码返回给对方进行认证的方式。</li>
+</ul>
+</li>
+<li><strong>DIGEST认证步骤</strong><ol>
+<li>请求需认证的资源时，服务器会随着状态码 401 Authorization Required，返 回带 WWW-Authenticate 首部字段的响应</li>
+<li>接收到 401 状态码的客户端，返回的响应中包含 DIGEST 认证必须的首部字段 Authorization 信 息。</li>
+<li>接收到 401 状态码的客户端，返回的响应中包含 DIGEST 认证必须的首部字段 Authorization 信 息。</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>DIGEST 认证提供防止密码被窃听的保护机制，但并不存在防止用户伪装的保护机制。因此它的适用范围也有所受限.</p>
+</blockquote>
+<ul>
+<li><strong>SSL客户端认证</strong></li>
+</ul>
+<blockquote>
+<p>SSL 客户端认证是借由 HTTPS 的客户端证书完成认证的方式。凭借客户端证书认证，服务器可确认访问是否来自已登录的客户端</p>
+</blockquote>
+<ul>
+<li><strong>SSL客户端认证的认证步骤</strong><ol>
+<li>需要事先将客户端证书分发给客户端，且客户端必须安装此证书。</li>
+<li>接收到需要认证资源的请求，服务器会发送 Certificate Request 报文，要求客户端提供客户端证书.</li>
+<li>用户选择将发送的客户端证书后，客户端会把客户端证书信息以 Client Certificate 报文方式发送给 服务器。</li>
+<li>服务器验证客户端证书验证通过后方可领取证书内客户端的公开密钥，然后开始 HTTPS 加密通信。</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>在多数情况下，SSL 客户端认证不会仅依靠证书完成认证，一般会和基于表单认证组合形成一 种双因素认证.</p>
+</blockquote>
+<ul>
+<li><strong>基于表单认证</strong></li>
+</ul>
+<blockquote>
+<p>基于表单的认证方法并不是在 HTTP 协议中定义的。客户端会向服务器上的 Web 应用程序发送登录信息，按登录信息的验证结果认证。</p>
+</blockquote>
+<ul>
+<li><strong>认证多半为基于表单认证</strong></li>
+<li><strong>Session管理及Cookie应用</strong><ol>
+<li>客户端把用户 ID 和密码等登录信息放入报文的实体部分，通常是以 POST 方法把请求发送给服务器。而这时，会使用 HTTPS 通信来进行 HTML 表单画面的显示和用户输入数据的发送 .</li>
+<li>服务器会发放用以识别用户的 Session ID。通过验证从客户端发送过来的登录信息进行身份认证，然后把用户的认证状态与 Session ID 绑定后记录在服务器端</li>
+<li>向客户端返回响应时，会在首部字段 Set-Cookie 内写入 Session ID</li>
+<li>客户端接收到从服务器端发来的 Session ID 后，会将其作为 Cookie 保存在本地。下次向服务器发 送请求时，浏览器会自动发送 Cookie，所以 Session ID 也随之发送到服务器。服务器端可通过验证接收到的 Session ID 识别用户和其认证状态.</li>
+</ol>
+</li>
+</ul>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">Older Post</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/02/09/图解HTTP学习笔记之确保安全的HTTPS/" title="图解HTTP学习笔记之确保安全的HTTPS">图解HTTP学习笔记之确保安全的HTTPS</a></h2>
+                <p class="excerpt">
+                
+                
+在 HTTP 协议中有可能存在信息窃听或身份伪装等安全问题。使用 HTTPS 通信机制可以有效地防止这些问题。
+
+1.HTTP的缺点
+
+通信使用明文可能会被窃听
+
+
+由于 HTTP 本身不具备加密的功能，所以也无法做到对通信整体(使用 HTTP 协议通信的请求和响应的内容)进行加密
+
+
+TCP/I
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-02-09T08:12:58.000Z" class="post-list__meta--date date">2018-02-09</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+</span><a class="btn-border-small" href="/2018/02/09/图解HTTP学习笔记之确保安全的HTTPS/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        &copy; 2018 陈不帅 - 本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+       
+    </span>
+    <span class="footer__copyright">
+             - 基于 <a href="http://hexo.io">Hexo</a> 搭建，使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题，由<a href="https://monniya.com ">@Monniya</a> 修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+         </span>
+       
+    
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
