@@ -158,7 +158,10 @@
   </header>
 
   <section class="post">
-    <h3 id="1-类也是对象"><a href="#1-类也是对象" class="headerlink" title="1.类也是对象"></a>1.类也是对象</h3><p>在理解元类之前，你需要先掌握Python中的类。Python中类的概念借鉴于Smalltalk，这显得有些奇特。在大多数编程语言中，类就是一组用来描述如何生成一个对象的代码段。在Python中这一点仍然成立：</p>
+    <p><a href="http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python" target="_blank" rel="external">What are metaclasses in Python?
+</a></p>
+<h3 id="1-类也是对象"><a href="#1-类也是对象" class="headerlink" title="1.类也是对象"></a>1.类也是对象</h3><hr>
+<p>在理解元类之前，你需要先掌握Python中的类。Python中类的概念借鉴于Smalltalk，这显得有些奇特。在大多数编程语言中，类就是一组用来描述如何生成一个对象的代码段。在Python中这一点仍然成立：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">ObjectCreator</span><span class="params">(object)</span>:</span></div><div class="line">…       <span class="keyword">pass</span></div><div class="line">…</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>my_object = ObjectCreator()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> my_object</div><div class="line">&lt;__main__.ObjectCreator object at <span class="number">0x8974f2c</span>&gt;</div></pre></td></tr></table></figure>
 <p>但是，Python中的类还远不止如此。类同样也是一种对象。只要你使用关键字class，Python解释器在执行的时候就会创建一个对象。下面的代码段：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">ObjectCreator</span><span class="params">(object)</span>:</span></div><div class="line">…       <span class="keyword">pass</span></div><div class="line">…</div></pre></td></tr></table></figure>
