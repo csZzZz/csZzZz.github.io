@@ -67,7 +67,7 @@
           <div>
           <nav class="cover-navigation cover-navigation--primary">
             <ul class="navigation">
-              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+              <li class="navigation__item"><a href="/#blog" title="Blogを読む" class="blog-button">Blog</a></li>
             
               <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
             
@@ -145,6 +145,69 @@
             <div class="main-post-list">
     
   <ol class="post-list">
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/02/08/图解HTTP学习笔记之于HTTP协作的Web服务器/" title="link to post.title">图解HTTP学习笔记之于HTTP协作的Web服务器</a></h2>
+      <p class="excerpt">
+    
+      
+一台Web服务器可搭建多个独立域名的Web网站,也可作为通信路径上中转服务器提升传输效率
+
+1.用单台虚拟主机实现多个域名
+
+HTTP/1.1 规范允许一台 HTTP 服务器搭建多个 Web 站点,这是因为利用了虚拟主机(Virtual Host，又称虚拟服务器)的功能
+在相同的 IP 地址下，由于虚拟主机可以寄存多个不同主机名和域名的 Web 网站，因此在发送 HTTP 请求 时，必须在 Ho
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2018-02-07T17:43:44.000Z" class="post-list__meta--date date">2018-02-08</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+</span><a class="btn-border-small" href="/2018/02/08/图解HTTP学习笔记之于HTTP协作的Web服务器/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/02/07/图解HTTP学习笔记之返回结果的HTTP状态码/" title="link to post.title">图解HTTP学习笔记之返回结果的HTTP状态码</a></h2>
+      <p class="excerpt">
+    
+      
+HTTP 状态码负责表示客户端 HTTP 请求的返回结果、标记服务器端的处理是否正常、通知出现的错误等工作
+
+状态码告知从服务器端返回的请求结果
+
+响应类别有一下5种:
+
+
+
+
+状态码
+类别
+原因短语
+
+
+
+
+1XX
+Informational(信息性状态码)
+接收的请求正在处理
+
+
+2XX
+Success(成功状态码)
+请求正常处理完毕
+
+
+3XX
+Redirection(重定向状态码)
+需要
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2018-02-07T13:42:26.000Z" class="post-list__meta--date date">2018-02-07</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+</span><a class="btn-border-small" href="/2018/02/07/图解HTTP学习笔记之返回结果的HTTP状态码/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
   
     
     <li>
@@ -303,118 +366,16 @@ Python风格规范Github地址
     </li>
   
     
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2017/12/25/Linux命令之系统信息/" title="link to post.title">Linux命令之系统信息</a></h2>
-      <p class="excerpt">
-    
-      日期和时间
-
-
-命令
-含义
-
-
-
-
-date
-系统时间
-
-
-cal
-calendar 查看日历，-y 选项可以查看一年的日历
-
-
-
-磁盘信息
-
-
-命令
-含义
-
-
-
-
-df -h
-disk free 显示磁盘剩余空间
-
-
-du -h[目录名]
-disk usage 显示目录下的文件大小
-
-
-选项说明 （-h
-以人性化的方式显示文件大小
-
-
-
-进程信息
-
-
-命令
-作用
-
-
-
-
-ps aux(选项)
-p
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2017-12-24T22:59:04.000Z" class="post-list__meta--date date">2017-12-25</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Linux/">Linux</a>
-</span><a class="btn-border-small" href="/2017/12/25/Linux命令之系统信息/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
-  
-    
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2017/12/25/Linux命令之用户权限管理/" title="link to post.title">Linux命令之用户权限管理</a></h2>
-      <p class="excerpt">
-    
-      用户和权限的基本概念基本概念
-用户是Linux系统中重要的一环，用户管理包括用户和组管理
-在Linux系统中，不论是由本机或是远程登录系统，每个系统都必须拥有一个账号，并且对于不同的系统资源拥有不同的使用权限
-在Linux中，可以指定每一个用户针对不同的文件或者目录的不同权限
-对文件/目录的权限包括：
-
-
-
-
-权限
-英文
-缩写
-数字代号（设置权限）
-
-
-
-
-读
-read
-r
-4
-
-
-写
-write
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2017-12-24T18:12:03.000Z" class="post-list__meta--date date">2017-12-25</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/Linux/">Linux</a>
-</span><a class="btn-border-small" href="/2017/12/25/Linux命令之用户权限管理/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
-  
-    
   </ol>
 
 
   <nav class="pagination" role="navigation">
     
-      <a class="older-posts pagination__newer btn btn-small btn-tertiary" href="/#blog">&larr; Prev</a>
+      <a class="older-posts pagination__newer btn btn-small btn-tertiary" href="/#blog">&larr; 前へ</a>
     
     <span class="pagination__page-number" >  2 / 3 </span>
     
-      <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/page/3/">Next &rarr;</a>
+      <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/page/3/">次へ &rarr;</a>
     
   </nav>
 

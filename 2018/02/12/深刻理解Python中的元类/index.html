@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-    <title>图解HTTP学习笔记之构建Web内容的技术 | 日常幻想指南</title>
+    <title>深刻理解Python中的元类 | 日常幻想指南</title>
     <meta name="renderer" content="webkit">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -15,11 +15,11 @@
     <meta name="description" content="谦虚 谨慎 严肃 活泼">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="图解HTTP学习笔记之构建Web内容的技术 | 日常幻想指南">
+    <meta name="twitter:title" content="深刻理解Python中的元类 | 日常幻想指南">
     <meta name="twitter:description" content="谦虚 谨慎 严肃 活泼">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="图解HTTP学习笔记之构建Web内容的技术 | 日常幻想指南">
+    <meta property="og:title" content="深刻理解Python中的元类 | 日常幻想指南">
     <meta property="og:description" content="谦虚 谨慎 严肃 活泼">
 
     
@@ -37,7 +37,7 @@
     <link rel="alternate" type="application/rss+xml" title="日常幻想指南" href="/atom.xml">
     
 
-    <link rel="canonical" href="http://yoursite.com/2018/02/10/图解HTTP学习笔记之构建Web内容的技术/"/>
+    <link rel="canonical" href="http://yoursite.com/2018/02/12/深刻理解Python中的元类/"/>
 
                  
 </head>
@@ -146,79 +146,22 @@
 
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2018-02-09T16:42:18.000Z" class="post-list__meta--date date">2018-02-10</time> &#8226; <span class="post-meta__tags tags">于 
-  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
+      <time datetime="2018-02-12T14:19:18.000Z" class="post-list__meta--date date">2018-02-12</time> &#8226; <span class="post-meta__tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
  </span>
       <span class="page-pv">
        No. <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
       </span> 
    
     </div>
-    <h1 class="post-title">图解HTTP学习笔记之构建Web内容的技术</h1>
+    <h1 class="post-title">深刻理解Python中的元类</h1>
   </header>
 
   <section class="post">
-    <h3 id="1-HTML"><a href="#1-HTML" class="headerlink" title="1.HTML"></a>1.HTML</h3><hr>
-<ul>
-<li><strong>Web页面几乎全由HTML构建</strong></li>
-</ul>
-<blockquote>
-<p>HTML(HyperText Markup Language，超文本标记语言)是为了发送 Web 上的超文本(Hypertext)而开发 的标记语言</p>
-</blockquote>
-<ul>
-<li><strong>CSS</strong></li>
-</ul>
-<blockquote>
-<p>CSS(Cascading Style Sheets，层叠样式表)可以指定如何展现 HTML 内的各种元素，属于样式表标准之 一</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.logo</span> &#123;</div><div class="line"><span class="attribute">padding</span>: <span class="number">20px</span>; <span class="attribute">text-align</span>: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="2-动态HTML"><a href="#2-动态HTML" class="headerlink" title="2.动态HTML"></a>2.动态HTML</h3><hr>
-<ul>
-<li><strong>让 Web 页面动起来的动态 HTML</strong></li>
-</ul>
-<blockquote>
-<p>动态 HTML 技术是通过调用客户端脚本语言 JavaScript，实现对 HTML 的 Web 页面的动态改造</p>
-</blockquote>
-<ul>
-<li><strong>更易控制 HTML 的 DOM</strong></li>
-</ul>
-<blockquote>
-<p>OM 是用以操作 HTML 文档和 XML 文档的 API</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">  <span class="keyword">var</span> content = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'P'</span>);</div><div class="line">  content[<span class="number">2</span>].style.color = <span class="string">'#FF0000'</span>;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="3-Web应用"><a href="#3-Web应用" class="headerlink" title="3,Web应用"></a>3,Web应用</h3><hr>
-<ul>
-<li><strong>与Web服务器及程序协作的CGI</strong></li>
-</ul>
-<blockquote>
-<p>CGI(Common Gateway Interface，通用网关接口)是指 Web 服务器在接收到客户端发送过来的请求后转发 给程序的一组机制</p>
-</blockquote>
-<ul>
-<li><strong>Servlet</strong></li>
-</ul>
-<blockquote>
-<p>ervlet1 是一种能在服务器上创建动态内容的程序。Servlet 是用 Java 语言实现的一个接口.<br>之前提及的 CGI，由于每次接到请求，程序都要跟着启动一次。因此一旦访问量过大，Web 服务器要承担相 当大的负载。而 Servlet 运行在与 Web 服务器相同的进程中，因此受到的负载较小 2。Servlet 的运行环境叫 做 Web 容器或 Servlet 容器</p>
-</blockquote>
-<h3 id="4-数据发布的格式及语言"><a href="#4-数据发布的格式及语言" class="headerlink" title="4.数据发布的格式及语言"></a>4.数据发布的格式及语言</h3><hr>
-<ul>
-<li><strong>可扩展标记语言XML</strong></li>
-</ul>
-<blockquote>
-<p>XML(eXtensible Markup Language，可扩展标记语言)是一种可按应用目标进行扩展的通用标记语言。旨 在通过使用 XML，使互联网数据共享变得更容易</p>
-</blockquote>
-<ul>
-<li><strong>发布更新信息的 RSS/Atom</strong></li>
-</ul>
-<blockquote>
-<p>RSS(简易信息聚合，也叫聚合内容)和 Atom 都是发布新闻或博客日志等更新信息文档的格式的总称。两 者都用到了 XML</p>
-</blockquote>
-<ul>
-<li><strong>JavaScript衍生的轻量级易用JSON</strong></li>
-</ul>
-<blockquote>
-<p>JSON(JavaScript Object Notation)是一种以 JavaScript(ECMAScript)的对象表示法为基础的轻量级数据标记语言。<br>能够处理的数据类型有 false/null/true/ 对象 / 数组 / 数字 / 字符串，这 7 种类型</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;name&quot;: &quot;Web Application Security&quot;, &quot;num&quot;: &quot;TR001&quot;&#125;</div></pre></td></tr></table></figure>
+    <h3 id="1-类也是对象"><a href="#1-类也是对象" class="headerlink" title="1.类也是对象"></a>1.类也是对象</h3><p>在理解元类之前，你需要先掌握Python中的类。Python中类的概念借鉴于Smalltalk，这显得有些奇特。在大多数编程语言中，类就是一组用来描述如何生成一个对象的代码段。在Python中这一点仍然成立：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">ObjectCreator</span><span class="params">(object)</span>:</span></div><div class="line">…       <span class="keyword">pass</span></div><div class="line">…</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>my_object = ObjectCreator()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> my_object</div><div class="line">&lt;__main__.ObjectCreator object at <span class="number">0x8974f2c</span>&gt;</div></pre></td></tr></table></figure>
+<p>但是，Python中的类还远不止如此。类同样也是一种对象。只要你使用关键字class，Python解释器在执行的时候就会创建一个对象。下面的代码段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">ObjectCreator</span><span class="params">(object)</span>:</span></div><div class="line">…       <span class="keyword">pass</span></div><div class="line">…</div></pre></td></tr></table></figure>
   </section>
 
 </article>
@@ -226,9 +169,11 @@
 <section class="read-more">
            
     
+        
+        
                
             <div class="read-more-item">
-                <span class="read-more-item-dim">新しい記事</span>
+                <span class="read-more-item-dim">以前の記事</span>
                 <h2 class="post-list__post-title post-title"><a href="/2018/02/12/Python语言特性/" title="Python语言特性">Python语言特性</a></h2>
                 <p class="excerpt">
                 
@@ -242,29 +187,6 @@
                 <div class="post-list__meta"><time datetime="2018-02-12T13:42:52.000Z" class="post-list__meta--date date">2018-02-12</time> &#8226; <span class="post-list__meta--tags tags">于 
   <a class="tag-link" href="/tags/Python/">Python</a>
 </span><a class="btn-border-small" href="/2018/02/12/Python语言特性/">继续阅读</a></div>
-                           
-            </div>
-        
-        
-               
-            <div class="read-more-item">
-                <span class="read-more-item-dim">以前の記事</span>
-                <h2 class="post-list__post-title post-title"><a href="/2018/02/09/图解HTTP学习笔记之基于HTTP的功能追加协议/" title="图解HTTP学习笔记之基于HTTP的功能追加协议">图解HTTP学习笔记之基于HTTP的功能追加协议</a></h2>
-                <p class="excerpt">
-                
-                
-虽然 HTTP 协议既简单又简捷，但随着时代的发展，其功能使用上捉襟见肘的疲态已经凸显
-1.HTTP协议的瓶颈
-
-一条连接上只可发送一个请求。 
-请求只能从客户端开始。客户端不可以接收除响应以外的指令。
-请求 / 响应首部未经压缩就发送。首部信息越多延迟越大。 
-发送冗长的首部。每次互相发送相同的
-                &hellip;
-                </p>
-                <div class="post-list__meta"><time datetime="2018-02-09T10:59:04.000Z" class="post-list__meta--date date">2018-02-09</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
-</span><a class="btn-border-small" href="/2018/02/09/图解HTTP学习笔记之基于HTTP的功能追加协议/">继续阅读</a></div>
                        
             </div>
         

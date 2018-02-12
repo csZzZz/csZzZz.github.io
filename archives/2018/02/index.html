@@ -67,7 +67,7 @@
           <div>
           <nav class="cover-navigation cover-navigation--primary">
             <ul class="navigation">
-              <li class="navigation__item"><a href="/#blog" title="Visit the blog" class="blog-button">Blog</a></li>
+              <li class="navigation__item"><a href="/#blog" title="Blogを読む" class="blog-button">Blog</a></li>
             
               <li class="navigation__item"><a href="/favourite">魔法工坊</a></li>
             
@@ -145,6 +145,40 @@
             <div class="main-post-list">
     
   <ol class="post-list">
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/02/12/深刻理解Python中的元类/" title="link to post.title">深刻理解Python中的元类</a></h2>
+      <p class="excerpt">
+    
+      1.类也是对象在理解元类之前，你需要先掌握Python中的类。Python中类的概念借鉴于Smalltalk，这显得有些奇特。在大多数编程语言中，类就是一组用来描述如何生成一个对象的代码段。在Python中这一点仍然成立：
+123456&amp;gt;&amp;gt;&amp;gt; class ObjectCreator(object):…       pass…&amp;gt;&amp;gt;&amp;gt; my_object = Obj
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2018-02-12T14:19:18.000Z" class="post-list__meta--date date">2018-02-12</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2018/02/12/深刻理解Python中的元类/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/02/12/Python语言特性/" title="link to post.title">Python语言特性</a></h2>
+      <p class="excerpt">
+    
+      1.Python的函数参数传递
+看两个例子:
+12345a = 1def fun(a):    a = 2fun(a)print a  # 1
+12345a = []def fun(a):    a.append(1)fun(a)print a  # [1]
+所有的变量都可以理解是内存中一个对象的”引用”.通过 id来看 a的内存地址可以比较理解:
+12345678a = 1def fun(a):
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2018-02-12T13:42:52.000Z" class="post-list__meta--date date">2018-02-12</time> &#8226; <span class="post-list__meta--tags tags">于 
+  <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2018/02/12/Python语言特性/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
   
     
     <li>
@@ -412,69 +446,6 @@ HTTP响应报文
     </li>
   
     
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/02/08/图解HTTP学习笔记之于HTTP协作的Web服务器/" title="link to post.title">图解HTTP学习笔记之于HTTP协作的Web服务器</a></h2>
-      <p class="excerpt">
-    
-      
-一台Web服务器可搭建多个独立域名的Web网站,也可作为通信路径上中转服务器提升传输效率
-
-1.用单台虚拟主机实现多个域名
-
-HTTP/1.1 规范允许一台 HTTP 服务器搭建多个 Web 站点,这是因为利用了虚拟主机(Virtual Host，又称虚拟服务器)的功能
-在相同的 IP 地址下，由于虚拟主机可以寄存多个不同主机名和域名的 Web 网站，因此在发送 HTTP 请求 时，必须在 Ho
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2018-02-07T17:43:44.000Z" class="post-list__meta--date date">2018-02-08</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
-</span><a class="btn-border-small" href="/2018/02/08/图解HTTP学习笔记之于HTTP协作的Web服务器/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
-  
-    
-    <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/02/07/图解HTTP学习笔记之返回结果的HTTP状态码/" title="link to post.title">图解HTTP学习笔记之返回结果的HTTP状态码</a></h2>
-      <p class="excerpt">
-    
-      
-HTTP 状态码负责表示客户端 HTTP 请求的返回结果、标记服务器端的处理是否正常、通知出现的错误等工作
-
-状态码告知从服务器端返回的请求结果
-
-响应类别有一下5种:
-
-
-
-
-状态码
-类别
-原因短语
-
-
-
-
-1XX
-Informational(信息性状态码)
-接收的请求正在处理
-
-
-2XX
-Success(成功状态码)
-请求正常处理完毕
-
-
-3XX
-Redirection(重定向状态码)
-需要
-    &hellip;
-      </p>
-      <div class="post-list__meta"><time datetime="2018-02-07T13:42:26.000Z" class="post-list__meta--date date">2018-02-07</time> &#8226; <span class="post-list__meta--tags tags">于 
-  <a class="tag-link" href="/tags/图解HTTP学习笔记/">图解HTTP学习笔记</a>
-</span><a class="btn-border-small" href="/2018/02/07/图解HTTP学习笔记之返回结果的HTTP状态码/">继续阅读</a></div>
-      <hr class="post-list__divider" />
-    </li>
-  
-    
   </ol>
 
 
@@ -482,7 +453,7 @@ Redirection(重定向状态码)
     
     <span class="pagination__page-number" >  1 / 2 </span>
     
-      <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/2018/02/page/2/">Next &rarr;</a>
+      <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/archives/2018/02/page/2/">次へ &rarr;</a>
     
   </nav>
 
